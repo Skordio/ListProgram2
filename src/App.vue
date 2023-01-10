@@ -17,7 +17,7 @@ export default defineComponent({
       <img style = "left:6em;" src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <ToDoList />
+  <ToDoList class ="listbox"/>
 </template>
 
 <style scoped>
@@ -33,5 +33,12 @@ export default defineComponent({
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+
+.listbox {
+  position: absolute;
+  top:2em;
+  left:12em;
+  width:50em;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <button>Delete</button>
+    <button class="button">Delete</button>
 </template>
 
 <script lang="ts">
@@ -9,3 +9,11 @@
 
 </script>
 
+<style scoped>
+
+.button {
+    position: relative;
+    left: 0.5em;
+}
+
+</style>

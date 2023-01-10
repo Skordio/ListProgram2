@@ -1,5 +1,5 @@
 <template>
-    <button>Edit</button>
+    <button class="button">Edit</button>
 </template>
 
 <script lang="ts">
@@ -8,3 +8,10 @@
     })
 </script>
 
+<style scoped>
+
+.button {
+    position: relative;
+}
+
+</style>
