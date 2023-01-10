@@ -1,3 +1,10 @@
+<template>
+    <div>
+        <p>{{ ToDoDetails }}</p>
+        <ToDoEditButton @edit-todo="" />
+    </div>
+</template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ToDoDeleteButton from './DeleteButton.vue';
@@ -16,10 +23,3 @@ export default defineComponent({
 
 
 </script>
-
-<template>
-    <div>
-        <p>{{ ToDoDetails }}</p>
-        <ToDoEditButton @edit-todo="" />
-    </div>
-</template>
