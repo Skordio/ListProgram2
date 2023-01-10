@@ -10,7 +10,7 @@
             v-if="editingPreview == true"
             @keydown.enter="editThisEntry()"
             style="position: absolute;
-                z-index: 10;
+                z-index: 10; 
                 bottom: .8em;
                 left: 10.8em;
                 font-size: 1em;
@@ -25,7 +25,10 @@
                 left: 11em;
                 font-size: 1em;
                 width:36em;
-                text-align: left;">
+                text-align: left;"
+            
+            :style="{'z-index': zvalue}"
+            >
 
             {{ details }}
         </p>
@@ -57,9 +60,11 @@ export default defineComponent({
         },
         editThisEntry() {
             if(this.editingPreview) {
+                this.zvalue = 10;
                 this.$emit('edit', this.editedMessage)
                 this.editingPreview = false;
             } else {
+                this.zvalue = -20;
                 this.editingPreview = true;
             }
         },
@@ -80,7 +85,8 @@ export default defineComponent({
         return {
             editingPreview: false,
             editedMessage: this.details,
-            created: new Date()
+            created: new Date(),
+            zvalue: 10 //the z value for the note details
         }
     }
 })
