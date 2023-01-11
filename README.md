@@ -1,5 +1,5 @@
 # My first Vue App
-## It's a todo planner list
+## It's a basic text entry planner app
 
 
 
