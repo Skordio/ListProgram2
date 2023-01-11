@@ -5,7 +5,7 @@
     
     <!--  The v-for list of entries, I was thinking about making this a Multiple 
           select form so you could easily delete multiple, but it might look bad -->
-    <div style="position: relative; left: 1.4em; top: 4em; text-align: left;">
+    <div class="list-box">
         <li v-for="(entry, index) in todoEntries" style="position: relative;" >
             <ToDoEntry 
                 :details="entry.details"

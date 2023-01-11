@@ -7,47 +7,36 @@
  -->
 
 <template>
-	<!-- I am just using this button as a nice background for my text entry box -->
-    <button class="header-bar" style="z-index: 50;"> </button>
+	<!-- container element for logos and text, this is just one
+		item in the main header container -->
+	<div class="logobox">
+		<!-- little "Powered by" text element-->
+		<p> Powered By: </p>
 
-	<!-- little "Powered by" text element-->
-	<h style="	position:inherit;
-				top:.1em; 
-				left: 5em; 
-				font-size: large;
-				z-index: 100;"> 
-                    
-		Powered By:
-    </h>
+		<!-- logos -->
+		<div>
+			<a  href="https://vitejs.dev" style="order:1"
+				target="_blank">
 
-	<!-- I left these logos in because they look nice, but stopped them from lighting up -->
-	<a  style="left:3em;" 
-		href="https://vitejs.dev" 
-		target="_blank">
-
-		<img style="left:1em;" src="/vite.svg" class="logo" alt="Vite logo" />
-	</a>
-	<a  href="https://vuejs.org/" 
-		target="_blank">
-		
-		<img style="left:6em;" src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
-	</a>
+				<img src="/vite.svg" class="logo" alt="Vite logo" />
+			</a>
+			<a  href="https://vuejs.org/" style="order:0"
+				target="_blank">
+				
+				<img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
+			</a>
+		</div>
+	</div>
 
 	<!-- Input -->
     <input  v-model="newDetails" placeholder="new note" 
         @keydown.enter="makeNewEntry(newDetails)" 
-        style="	height: 1em;
-                top:1.2em;
-                left:8em;
-                width:40em;
-                padding: 0.2em;
-                font-size: 1.5em;" />
+        class="input-box" />
+
     <!-- The add button -->
     <ToDoNewButton @click="makeNewEntry(newDetails)" 
         style=" height: 2.4em;
                 font-size: 1em;
-                top:2.1em;
-                right:5em;
                 width:8em;"/>
 	<!-- Add Entry Button -->
 </template>
@@ -68,3 +57,63 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style>
+
+.input-box {
+	flex: 1 8 40em;
+	min-height: 3em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/* container for whole 'powered by' section */
+	.logobox {
+		display: flex;
+		justify-content:center;
+		flex-flow: column nowrap;
+
+		flex: 0 1 7em;
+		order: 0;
+		margin-top: -10px;
+
+		
+		/* background-color: black; */
+	}
+
+	/* the container for just the two logos, so they appear side by side */
+	.logobox > div {
+		display: flex;
+		justify-content: space-evenly;
+		flex: 1 1;
+	}
+
+	/* images style */
+	.logobox > div > a > img {
+		flex: 1 1;
+	}
+
+	/* text element style */
+	.logobox > p {
+		flex: 1 1;
+		margin-bottom: 3px;
+		font-size: small;
+	}
+</style>

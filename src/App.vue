@@ -1,13 +1,15 @@
 
 <template>
-    <!-- Top Bar -->
-    <div class="header-bar">
+    <!-- Top Bar, fixed to top of screen -->
+    <div class="header-bar-container">
         <ToDoEntryBox/>
     </div>
 
-    <!-- List, -->
-    <!--  note to self: edit these position values in order to move the list entries around altogether -->
-    <ToDoList style="position: absolute; top: 7.5em; left: 3em; width: 50em;" />
+    <div class="entry-list-box">
+        <!-- List, -->
+        <!--  note to self: edit these position values in order to move the list entries around altogether -->
+        <ToDoList />
+    </div>
 </template>
 
 <script lang="ts">
@@ -23,21 +25,36 @@ export default defineComponent({
 </script>
 
 <style >
-.logo {
-    height: 3em;
-    z-index: 100;
+.header-bar-container {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 1;
+    overflow:hidden;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 1em;
-    padding: 20px;
-    will-change: filter;
+    left: 1em;
+    right: 1em;
+    
+    
+    border-radius: 1.5em;
+
+    background-color: #2b1155;
 }
 
-.header-bar {
-    position:fixed;
-    z-index: 100;
-    top:0.7em;
-    width: 81em;
-    left: 1.5em;
-    height: 5.2em
+/* .header-bar-container > ToDoEntryBox {
+    display: flex;
+    flex-flow: row nowrap;
+} */
+
+.entry-list-box {
+    background-color: #929194;
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    left: 2em; 
+    top: 7em; 
+    text-align: left;
 }
 </style>
