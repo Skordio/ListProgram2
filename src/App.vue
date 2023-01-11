@@ -1,26 +1,14 @@
-<script lang="ts">
-import ToDoList from './components/ToDoList.vue'
-import { defineComponent } from 'vue';
-export default defineComponent({
-    components: {
-        ToDoList
-    }
-})
-</script>
 
 <template>
-    <!--  this <v-hover> thing was me trying to stop the button from being highlihghted when you mouse over it,
-        I just wanted it there as a background for the top bar because it looks nice -->
-    <v-hover disabled>
-        <button
-            style=" position: fixed; 
-                    z-index: 50;    
-                    top:0.7em; 
-                    width: 81em; 
-                    left: 1.5em; 
-                    height: 5.2em">
-        </button>
-    </v-hover>
+    <!-- I am just using this button as a nice background for my text entry box -->
+    <button
+        style=" position: fixed; 
+                z-index: 50;    
+                top:0.7em; 
+                width: 81em; 
+                left: 1.5em; 
+                height: 5.2em">
+    </button>
 
     <!-- Logo elements -->
     <div>
@@ -52,6 +40,16 @@ export default defineComponent({
     <!--  note to self: edit these position values in order to move the list entries around altogether -->
     <ToDoList style="position: absolute; top: 2.5em; left: 3em; width: 50em;" />
 </template>
+
+<script lang="ts">
+import ToDoList from './components/ToDoList.vue'
+import { defineComponent } from 'vue';
+export default defineComponent({
+    components: {
+        ToDoList
+    }
+})
+</script>
 
 <style scoped>
 .logo {
