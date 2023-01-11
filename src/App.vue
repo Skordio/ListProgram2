@@ -7,7 +7,9 @@
 
     <!-- List, -->
     <!--  note to self: edit these position values in order to move the list entries around altogether -->
-    <ToDoList class="entry-list-box" />
+    <div class="entry-list-box">
+        <ToDoList  />
+    </div>
 </template>
 
 <script lang="ts">
@@ -47,7 +49,7 @@ export default defineComponent({
 } */
 
 .entry-list-box {
-    background-color: #929194;
+    /* background-color: #929194; */
     display: flex;
     flex-flow: column;
     flex: 1 1;

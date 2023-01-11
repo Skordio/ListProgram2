@@ -1,47 +1,41 @@
 <template>
-    <!-- Buttons -->
-        <ToDoEditButton @click="editThisEntry()" />
-        <ToDoDeleteButton @click="deleteThisEntry()" />
+    
+	<div class="entry-container">
+        <!-- Buttons -->
+        <ToDoEditButton class="edit button" @click="editThisEntry()" />
+        <ToDoDeleteButton class="delete button" @click="deleteThisEntry()" />
 
-    <!-- Input for edits -->
-        <input 
-            ref="editingInput"
-            v-model="editedMessage" 
-            v-if="editingPreview == true"
-            @keydown.enter="editThisEntry()"
-            style=" position: absolute;
-                    word-wrap: break-word;
-                    z-index: 10; 
-                    top: .4em;
-                    left: 10.8em;
-                    font-size: 1em;
-                    width:55.5em;
-                    text-align: left;"/>
+            <div>
+                <div  class="entry-edit-container">
+                    <!-- Input for edits -->
+                    <input 
+                        v-model="editedMessage" 
+                        v-if="editingPreview == true"
+                        @keydown.enter="editThisEntry()"
+                        style=" word-wrap: break-word;
+                                font-size: 1em;
+                                text-align: left;"/>
+                </div>
+                <div  class="entry-edit-container">
+                    <!-- Note details -->
+                    <p  v-if="editingPreview == false" 
+                        style=" font-size: 1em; 
+                                text-align: left;"
+                        :style="{'z-index': zvalue}" >
 
-    <!-- Note details -->
-        <p  v-if="editingPreview == false" 
-            style=" position: absolute; 
-                    top: -0.6em;
-                    left: 11em; 
-                    font-size: 1em; 
-                    width:36em; 
-                    text-align: left;"
-            :style="{'z-index': zvalue}" >
-
-            {{ details }}
-        </p>
+                        {{ details }}
+                    </p>
+                </div>
+            </div>
 
     <!-- Date -->
-        <p  style=" position: absolute; 
-                    top: -0.6em; 
-                    left: 11em;
-                    font-size: 1em; 
+        <p  style=" font-size: 1em; 
                     width:66.5em; 
                     text-align: right;" >
 
             {{created.toLocaleTimeString()}} {{created.toLocaleDateString()}} 
         </p>
-        <div :style="{height: calculatePadding() + 0.5 + 'em'}"></div>
+    </div>
 
 </template>
 
@@ -91,3 +85,28 @@ export default defineComponent({
 
 
 </script>
+
+<style>
+    .button{
+        flex: 1 1;
+        order: 1
+    }
+
+    .entry-edit-container{
+        display: flex;
+        align-items: center;
+        flex: 1 1 30em;
+        order: 2
+    }
+
+    .date{
+        flex: 1 1;
+        order: 4
+    }
+
+    
+
+	.entry-container{
+        display: flex;
+    }
+</style>
