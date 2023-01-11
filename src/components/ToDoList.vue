@@ -1,27 +1,18 @@
 <template>
-    <!--  Also I am not sure how to format the inside of these <input xxx /> 
-          items so lmk if what I did here was good or how I could do better -->
-
-    
-    <!--  The v-for list of entries, I was thinking about making this a Multiple 
-          select form so you could easily delete multiple, but it might look bad -->
-    <div class="list-box">
-        <li v-for="(entry, index) in todoEntries" style="position: relative;" >
-            <ToDoEntry 
-                :details="entry.details"
-                :created="new Date()"
-                :key="entry.id"
-                :characters="entry.details.length"
-                @edit="(message) => editEntry(index, message)"
-                @delete="deleteEntry(index)"
-            />
-        </li>
-    </div>  
+	<li v-for="(entry, index) in todoEntries" style="position: relative;" >
+		<ToDoEntry 
+			:details="entry.details"
+			:created="new Date()"
+			:key="entry.id"
+			:characters="entry.details.length"
+			@edit="(message) => editEntry(index, message)"
+			@delete="deleteEntry(index)"
+		/>
+	</li>
 </template>
 
 <script lang="ts">
 import ToDoEntry from "./TodoListComponents/Entry.vue"
-import ToDoNewButton from "./TodoListComponents/NewEntryButton.vue"
 import {defineComponent } from 'vue'
 
 export default defineComponent({
@@ -37,8 +28,7 @@ export default defineComponent({
     }
   },
   components: {
-    ToDoEntry,
-    ToDoNewButton
+    ToDoEntry
   },
   data() {
     return {
