@@ -34,11 +34,10 @@
         class="input-box" />
 
     <!-- The add button -->
-    <ToDoNewButton @click="makeNewEntry(newDetails)" 
-        style=" height: 2.4em;
-                font-size: 1em;
-                width:8em;"/>
-	<!-- Add Entry Button -->
+    <Button @click="makeNewEntry(newDetails)" 
+        class="add-entry-button">
+		Add Note
+	</Button>
 </template>
 
 <script lang=ts>
@@ -60,29 +59,18 @@ export default defineComponent({
 
 <style>
 
-.input-box {
-	flex: 1 8 40em;
-	min-height: 3em;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	.input-box {
+		flex: 1 6 50em;
+		min-height: 1.5em;
+		max-height: 2em;
+		font-size: 1.5em;
+	}
+	.add-entry-button {
+		flex: 1 0;
+		margin-left: 1em;
+		margin-right: 1em;
+		max-width: 10em;
+	}
 
 	/* container for whole 'powered by' section */
 	.logobox {
@@ -107,12 +95,12 @@ export default defineComponent({
 
 	/* images style */
 	.logobox > div > a > img {
-		flex: 1 1;
+		flex: 0 1;
 	}
 
 	/* text element style */
 	.logobox > p {
-		flex: 1 1;
+		flex: 0 1;
 		margin-bottom: 3px;
 		font-size: small;
 	}

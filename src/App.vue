@@ -5,11 +5,9 @@
         <ToDoEntryBox/>
     </div>
 
-    <div class="entry-list-box">
-        <!-- List, -->
-        <!--  note to self: edit these position values in order to move the list entries around altogether -->
-        <ToDoList />
-    </div>
+    <!-- List, -->
+    <!--  note to self: edit these position values in order to move the list entries around altogether -->
+    <ToDoList class="entry-list-box" />
 </template>
 
 <script lang="ts">
@@ -52,9 +50,11 @@ export default defineComponent({
     background-color: #929194;
     display: flex;
     flex-flow: column;
+    flex: 1 1;
+
     position: absolute;
-    left: 2em; 
-    top: 7em; 
-    text-align: left;
+    top: 8em;
+    left: 2em;
+    right: 2em;
 }
 </style>
