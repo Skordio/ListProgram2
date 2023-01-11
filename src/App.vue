@@ -1,44 +1,43 @@
+
+<template>
+    <!-- Top Bar -->
+    <div class="header-bar">
+        <ToDoEntryBox/>
+    </div>
+
+    <!-- List, -->
+    <!--  note to self: edit these position values in order to move the list entries around altogether -->
+    <ToDoList style="position: absolute; top: 7.5em; left: 3em; width: 50em;" />
+</template>
+
 <script lang="ts">
 import ToDoList from './components/ToDoList.vue'
 import { defineComponent } from 'vue';
+import ToDoEntryBox from './components/ToDoEntryBox.vue';
 export default defineComponent({
-  components: {
-    ToDoList
-  }
+    components: {
+    ToDoList,
+    ToDoEntryBox
+}
 })
 </script>
 
-<template>
-  <div>
-    <a style = "left:3em;" href="https://vitejs.dev" target="_blank">
-      <img style = "left:1em;" src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img style = "left:6em;" src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <ToDoList class ="listbox"/>
-</template>
-
-<style scoped>
+<style >
 .logo {
-  height: 3em;
-  position: absolute;
-  top:1em;
-  padding: 20px;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+    height: 3em;
+    z-index: 100;
+    position: fixed;
+    top: 1em;
+    padding: 20px;
+    will-change: filter;
 }
 
-.listbox {
-  position: absolute;
-  top:2em;
-  left:12em;
-  width:50em;
+.header-bar {
+    position:fixed;
+    z-index: 100;
+    top:0.7em;
+    width: 81em;
+    left: 1.5em;
+    height: 5.2em
 }
 </style>

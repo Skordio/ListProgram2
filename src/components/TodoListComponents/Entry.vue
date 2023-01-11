@@ -9,42 +9,39 @@
             v-model="editedMessage" 
             v-if="editingPreview == true"
             @keydown.enter="editThisEntry()"
-            style="position: absolute;
-                z-index: 10; 
-                bottom: .8em;
-                left: 10.8em;
-                font-size: 1em;
-                width:37em;
-                text-align: left;"/>
+            style=" position: absolute;
+                    word-wrap: break-word;
+                    z-index: 10; 
+                    top: .4em;
+                    left: 10.8em;
+                    font-size: 1em;
+                    width:55.5em;
+                    text-align: left;"/>
 
     <!-- Note details -->
-        <p 
-            v-if="editingPreview == false"
-            style="position: absolute;
-                top: -0.6em;
-                left: 11em;
-                font-size: 1em;
-                width:36em;
-                text-align: left;"
-            
-            :style="{'z-index': zvalue}"
-            >
+        <p  v-if="editingPreview == false" 
+            style=" position: absolute; 
+                    top: -0.6em;
+                    left: 11em; 
+                    font-size: 1em; 
+                    width:36em; 
+                    text-align: left;"
+            :style="{'z-index': zvalue}" >
 
             {{ details }}
         </p>
 
     <!-- Date -->
-        <p
-            style="position: absolute;
-                top: -0.6em;
-                left: 11em;
-                font-size: 1em;
-                width:48em;
-                text-align: right;">
-        <!--  -->
+        <p  style=" position: absolute; 
+                    top: -0.6em; 
+                    left: 11em;
+                    font-size: 1em; 
+                    width:66.5em; 
+                    text-align: right;" >
+
             {{created.toLocaleTimeString()}} {{created.toLocaleDateString()}} 
         </p>
-        <div :style="{height: calculatePadding() + 'em'}"></div>
+        <div :style="{height: calculatePadding() + 0.5 + 'em'}"></div>
 
 </template>
 
@@ -68,8 +65,9 @@ export default defineComponent({
                 this.editingPreview = true;
             }
         },
+        // This padding method isn't great but works a little
         calculatePadding() {
-            return this.characters!/47;
+            return (this.characters!)/(63);
         }
     },
     components: {
