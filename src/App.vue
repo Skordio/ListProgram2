@@ -1,57 +1,28 @@
 
 <template>
-    <!-- I am just using this button as a nice background for my text entry box -->
-    <button
-        style=" position: fixed; 
-                z-index: 50;    
-                top:0.7em; 
-                width: 81em; 
-                left: 1.5em; 
-                height: 5.2em">
-    </button>
-
-    <!-- Logo elements -->
-    <div>
-        <!-- little text element-->
-        <h style="  z-index: 100; 
-                    position: fixed; 
-                    top:0.8em; 
-                    left: 5em; 
-                    font-size: small;"> 
-                    
-                    Powered By:
-        </h>
-
-        <!-- I left these logos in because they look nice, but stopped them from lighting up -->
-        <a  style="left:3em;" 
-            href="https://vitejs.dev" 
-            target="_blank">
-
-            <img style="left:1em;" src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a  href="https://vuejs.org/" 
-            target="_blank">
-            
-            <img style="left:6em;" src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
+    <!-- Top Bar -->
+    <div class="header-bar">
+        <ToDoEntryBox/>
     </div>
 
     <!-- List, -->
     <!--  note to self: edit these position values in order to move the list entries around altogether -->
-    <ToDoList style="position: absolute; top: 2.5em; left: 3em; width: 50em;" />
+    <ToDoList style="position: absolute; top: 7.5em; left: 3em; width: 50em;" />
 </template>
 
 <script lang="ts">
 import ToDoList from './components/ToDoList.vue'
 import { defineComponent } from 'vue';
+import ToDoEntryBox from './components/ToDoEntryBox.vue';
 export default defineComponent({
     components: {
-        ToDoList
-    }
+    ToDoList,
+    ToDoEntryBox
+}
 })
 </script>
 
-<style scoped>
+<style >
 .logo {
     height: 3em;
     z-index: 100;
@@ -59,5 +30,14 @@ export default defineComponent({
     top: 1em;
     padding: 20px;
     will-change: filter;
+}
+
+.header-bar {
+    position:fixed;
+    z-index: 100;
+    top:0.7em;
+    width: 81em;
+    left: 1.5em;
+    height: 5.2em
 }
 </style>

@@ -8,23 +8,16 @@
 
 <template>
 	<!-- I am just using this button as a nice background for my text entry box -->
-    <button
-        style=" position: fixed; 
-                z-index: 50;    
-                top:0.7em; 
-                width: 81em; 
-                left: 1.5em; 
-                height: 5.2em">
-    </button>
+    <button class="header-bar" style="z-index: 50;"> </button>
 
 	<!-- little "Powered by" text element-->
-	<h style="  z-index: 100; 
-                    position: fixed; 
-                    top:0.8em; 
-                    left: 5em; 
-                    font-size: small;"> 
+	<h style="	position:inherit;
+				top:.1em; 
+				left: 5em; 
+				font-size: large;
+				z-index: 100;"> 
                     
-                    Powered By:
+		Powered By:
     </h>
 
 	<!-- I left these logos in because they look nice, but stopped them from lighting up -->
@@ -37,28 +30,24 @@
 	<a  href="https://vuejs.org/" 
 		target="_blank">
 		
-		<img style="left:6em;" src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+		<img style="left:6em;" src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
 	</a>
 
 	<!-- Input -->
     <input  v-model="newDetails" placeholder="new note" 
         @keydown.enter="makeNewEntry(newDetails)" 
-        style=" position: fixed;
-                height: 1em;
-                top:1.9em;
+        style="	height: 1em;
+                top:1.2em;
                 left:8em;
                 width:40em;
                 padding: 0.2em;
-                z-index: 100;
                 font-size: 1.5em;" />
     <!-- The add button -->
     <ToDoNewButton @click="makeNewEntry(newDetails)" 
         style=" height: 2.4em;
                 font-size: 1em;
-                position: fixed;
-                top:2.85em;
-                left:74em;
-                z-index: 100;
+                top:2.1em;
+                right:5em;
                 width:8em;"/>
 	<!-- Add Entry Button -->
 </template>
