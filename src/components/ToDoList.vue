@@ -1,12 +1,12 @@
 <template>
-		<ToDoEntry v-for="(entry, index) in todoEntries"
-			:details="entry.details"
-			:created="new Date()"
-			:key="entry.id"
-			:characters="entry.details.length"
-			@edit="(message) => editEntry(index, message)"
-			@delete="deleteEntry(index)"
-		/>
+	<ToDoEntry v-for="(entry, index) in todoEntries"
+		:details="entry.details"
+		:created="new Date()"
+		:key="entry.id"
+		:characters="entry.details.length"
+		@edit="(message) => editEntry(index, message)"
+		@delete="deleteEntry(index)"
+	/>
 </template>
 
 <script lang="ts">

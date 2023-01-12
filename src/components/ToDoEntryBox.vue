@@ -46,7 +46,7 @@ import ToDoList from './ToDoList.vue';
 export default defineComponent({
 	methods: {
 		makeNewEntry(message: string) {
-			ToDoList.makeNewEntry(message);
+			this.$emit('makeNew', message)
 		}
 	},
 	data () {

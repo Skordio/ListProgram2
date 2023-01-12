@@ -1,10 +1,13 @@
 
 <template>
     <!-- Top Bar, fixed to top of screen -->
-    <div class="header-bar-container">
-        <ToDoEntryBox/>
+    <!-- WIP, will get rid of styling -->
+    <div style="display: flex; top: 1em;left: 1em;right: 1em;position: fixed;align-items: center;">
+        <div class="header-bar-container">
+            <ToDoEntryBox
+            @makeNew="(message) => makeNewEntry(message)"/>
+        </div>
     </div>
-
     <!-- List, -->
     <!--  note to self: edit these position values in order to move the list entries around altogether -->
     <div class="entry-list-box">
@@ -18,9 +21,15 @@ import { defineComponent } from 'vue';
 import ToDoEntryBox from './components/ToDoEntryBox.vue';
 export default defineComponent({
     components: {
-    ToDoList,
-    ToDoEntryBox
-}
+        ToDoList,
+        ToDoEntryBox
+    },
+    methods: {
+        makeNewEntry(message: string) {
+            ToDoList.makeNewEntry(message);
+        }
+    }
+
 })
 </script>
 
@@ -28,14 +37,10 @@ export default defineComponent({
 .header-bar-container {
     display: flex;
     flex-flow: row nowrap;
-    flex: 1 1;
+    flex: 1 1 60em;
     overflow:hidden;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 1em;
-    left: 1em;
-    right: 1em;
     
     
     border-radius: 1.5em;
