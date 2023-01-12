@@ -10,9 +10,12 @@
 </template>
 
 <script lang="ts">
-import ToDoEntry from "./TodoListComponents/Entry.vue"
+import ToDoEntry from "./Entry.vue"
 import {ref, defineComponent} from 'vue'
 export default defineComponent({
+	components: {
+		ToDoEntry
+	},
 	setup(props) {
 		let makeNewEntry = (message: string) => {
 			todoEntries.value.push({details: message, id: newEntryId.value++})

@@ -2,67 +2,59 @@
 <template>
     <!-- Top Bar, fixed to top of screen -->
     <!-- WIP, will get rid of styling -->
-    <div style="display: flex; top: 1em;left: 1em;right: 1em;position: fixed;align-items: center;">
-        <div class="header-bar-container">
-            <ToDoEntryBox
-            @makeNew="(message: string) => {}"/>
-        </div>
+    <div class="header-bar-container">
+        <ToDoEntryBox @makeNew="(message:string) => entrylist.makeNewEntry(message)"/>
     </div>
+    
     <!-- List, -->
-    <!--  note to self: edit these position values in order to move the list entries around altogether -->
-    <div class="entry-list-box">
-        <ToDoList ref="list"/>
+    <div class="entry-list-container-box">
+        <ToDoList ref="entrylist"/>
     </div>
 </template>
 
 <script lang="ts">
     import ToDoList from './components/ToDoList.vue'
     import ToDoEntryBox from './components/ToDoEntryBox.vue';
-    import { ref, defineComponent } from 'vue'
+    import { ref, reactive, defineComponent } from 'vue'
     export default defineComponent({
+        components: {
+            ToDoList,
+            ToDoEntryBox
+        },
         setup(props) {
-            
-            const list = ref(null)
-            let makeNewEntry = (message: string) => {
-            }
+            const entrylist = reactive(ToDoList)
             return {
-                list,
-                makeNewEntry
+                // makeNewEntry,
+                entrylist
             }
         }
     })
-    
 </script>
 
-<style >
+<style>
+/* this flexbox is for positioning at top of screen */
 .header-bar-container {
     display: flex;
     flex-flow: row nowrap;
-    flex: 1 1 60em;
+    flex: 1 1;
     overflow:hidden;
-    align-items: center;
-    justify-content: center;
-    
-    
-    border-radius: 1.5em;
-
-    background-color: #2b1155;
+    top: 1.5em;
+    left: 1.5em;
+    right: 1.5em;
+    position: fixed;
+    justify-content: stretch;
+    z-index: 1;
 }
 
-/* .header-bar-container > ToDoEntryBox {
-    display: flex;
-    flex-flow: row nowrap;
-} */
-
-.entry-list-box {
+.entry-list-container-box {
     /* background-color: #929194; */
     display: flex;
     flex-flow: column;
     flex: 1 1;
 
     position: absolute;
-    top: 8em;
-    left: 2em;
-    right: 2em;
+    top: 7em;
+    left: 2.5em;
+    right: 2.5em;
 }
 </style>
