@@ -5,32 +5,33 @@
     <div style="display: flex; top: 1em;left: 1em;right: 1em;position: fixed;align-items: center;">
         <div class="header-bar-container">
             <ToDoEntryBox
-            @makeNew="(message) => makeNewEntry(message)"/>
+            @makeNew="(message: string) => {}"/>
         </div>
     </div>
     <!-- List, -->
     <!--  note to self: edit these position values in order to move the list entries around altogether -->
     <div class="entry-list-box">
-        <ToDoList  />
+        <ToDoList ref="list"/>
     </div>
 </template>
 
 <script lang="ts">
-import ToDoList from './components/ToDoList.vue'
-import { defineComponent } from 'vue';
-import ToDoEntryBox from './components/ToDoEntryBox.vue';
-export default defineComponent({
-    components: {
-        ToDoList,
-        ToDoEntryBox
-    },
-    methods: {
-        makeNewEntry(message: string) {
-            ToDoList.makeNewEntry(message);
+    import ToDoList from './components/ToDoList.vue'
+    import ToDoEntryBox from './components/ToDoEntryBox.vue';
+    import { ref, defineComponent } from 'vue'
+    export default defineComponent({
+        setup(props) {
+            
+            const list = ref(null)
+            let makeNewEntry = (message: string) => {
+            }
+            return {
+                list,
+                makeNewEntry
+            }
         }
-    }
-
-})
+    })
+    
 </script>
 
 <style >

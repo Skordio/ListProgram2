@@ -4,42 +4,43 @@
 		:created="new Date()"
 		:key="entry.id"
 		:characters="entry.details.length"
-		@edit="(message) => editEntry(index, message)"
+		@edit="(message: string) => editEntry(index, message)"
 		@delete="deleteEntry(index)"
 	/>
 </template>
 
 <script lang="ts">
 import ToDoEntry from "./TodoListComponents/Entry.vue"
-import {defineComponent } from 'vue'
-
+import {ref, defineComponent} from 'vue'
 export default defineComponent({
-	methods: {
-		makeNewEntry(message: string) {
-			this.todoEntries.push({details: message, id: this.newEntryId++})
-		},
-		deleteEntry(index: number) {
-			this.todoEntries.splice(index, 1)
-		},
-		editEntry(index: number, message: string) {
-			this.todoEntries[index].details = message;
+	setup(props) {
+		let makeNewEntry = (message: string) => {
+			todoEntries.value.push({details: message, id: newEntryId.value++})
 		}
-	},
-	components: {
-			ToDoEntry
-	},
-	data() {
+		let deleteEntry = (index: number) => {
+			todoEntries.value.splice(index, 1)
+		}
+		let editEntry = (index: number, message: string) => {
+			todoEntries.value[index].details = message;
+		}
+
+		const todoEntries = ref([{details: 'Make Todo List App', id: 0}, 
+				{details: 'Make coffee', id: 1}])
+		const newDetails = ref('')
+		const newEntryId = ref(2)
+		const currentEntryCharacters = ref(0)
+
 		return {
-			todoEntries: [
-				{details: 'Make Todo List App', id: 0}, 
-				{details: 'Make coffee', id: 1}],
-			newDetails: '',
-			newEntryId: 2,
-			currentEntryCharacters: 0 ///helps to pad the messages so they dont overlap
+			makeNewEntry,
+			deleteEntry,
+			editEntry,
+			todoEntries,
+			newDetails,
+			newEntryId,
+			currentEntryCharacters
 		}
 	}
 })
-
 </script>
 
 <style>
