@@ -7,7 +7,7 @@
     </div>
     
     <!-- List, -->
-    <div class="entry-list-container-box">
+    <div class="entry-list-container">
         <ToDoList ref="entrylist"/>
     </div>
 </template>
@@ -36,25 +36,24 @@
 .header-bar-container {
     display: flex;
     flex-flow: row nowrap;
-    flex: 1 1;
-    overflow:hidden;
+    justify-content: center;
+    overflow: hidden;
+
     top: 1.5em;
     left: 1.5em;
     right: 1.5em;
     position: fixed;
-    justify-content: stretch;
     z-index: 1;
 }
 
-.entry-list-container-box {
+.entry-list-container {
     /* background-color: #929194; */
     display: flex;
     flex-flow: column;
-    flex: 1 1;
 
-    position: absolute;
-    top: 7em;
+    top: 8em;
     left: 2.5em;
     right: 2.5em;
+    position: absolute;
 }
 </style>

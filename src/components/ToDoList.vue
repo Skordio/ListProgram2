@@ -1,12 +1,14 @@
 <template>
-	<ToDoEntry v-for="(entry, index) in todoEntries"
-		:details="entry.details"
-		:created="new Date()"
-		:key="entry.id"
-		:characters="entry.details.length"
-		@edit="(message: string) => editEntry(index, message)"
-		@delete="deleteEntry(index)"
-	/>
+	<div class="entry-list-container">
+		<ToDoEntry v-for="(entry, index) in todoEntries"
+			:details="entry.details"
+			:created="new Date()"
+			:key="entry.id"
+			:characters="entry.details.length"
+			@edit="(message: string) => editEntry(index, message)"
+			@delete="deleteEntry(index)"
+		/>
+	</div>
 </template>
 
 <script lang="ts">
@@ -45,7 +47,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style>
-
-</style>

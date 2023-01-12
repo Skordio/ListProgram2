@@ -4,25 +4,24 @@
         <div   class="entry-edit-container">
             <div>
                 <!-- Input for edits -->
-                <textarea v-model="editedMessage" v-if="editingPreview == true" @keydown.enter="editThisEntry()" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'/>
+                <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
             </div>
             <div>
                 <!-- Note details -->
-                <p  v-if="editingPreview == false"> {{ details }} </p>
+                <p  v-show="editingPreview == false"> {{ details }} </p>
             </div>
         </div>
 
         <div class="button-date-container">
-            <!-- Buttons -->
-            <button class="edit button" @click="editThisEntry()">Edit</button>
-            <button class="delete button" @click="deleteThisEntry()">Delete</button>
-
+            
             <!-- Date -->
-            <p  style=" font-size: 1em; 
-                        text-align: right;" >
+            <p  style=" font-size: 1em;" >
 
                 {{created.toLocaleTimeString()}} {{created.toLocaleDateString()}} 
             </p>
+            <!-- Buttons -->
+            <button class="button" @click="editThisEntry()">Edit</button>
+            <button class="button" @click="deleteThisEntry()">Delete</button>
         </div>
     </div>
 
@@ -45,10 +44,6 @@ export default defineComponent({
                 this.zvalue = -20;
                 this.editingPreview = true;
             }
-        },
-        // This padding method isn't great but works a little
-        calculatePadding() {
-            return (this.characters!)/(63);
         }
     },
     props: {
@@ -73,61 +68,78 @@ export default defineComponent({
 
     .entry-container{
         display: flex;
-        flex: 1 1;
         flex-flow: row nowrap;
-        justify-content: space-between;
-        margin: 0.5em;
-        background-color: rgb(143, 86, 160);
+        margin: 5px;
         overflow: hidden;
+        align-items: center;
         
+        flex: 1 0;
+        
+        
+        background-color: #2b1155;
 		border-radius: 2em;
     }
 
     .entry-edit-container {
-        flex: 10 10 70em;
+        flex: 2 1;
         /* background-color: rgb(166, 165, 167); */
-        justify-content: flex-start;
-        min-width: 0;
     }
 
+    /* applied to both text and input */
     .entry-edit-container > div {
-        flex: 10 10 70em;
-        margin-left: 1em;
-        order: 2;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        margin-left: 1%;
+        
+        /* background-color: rgb(13, 10, 15); */
     }
 
     .entry-edit-container > div > p {
-        text-align: left;
+        flex: 1 1;
         word-wrap: break-word;
-        max-width: 70em;
+        font-size: 140%;
+        text-align: left;
+        
+        /* background-color: rgb(87, 0, 173); */
     }
 
     .entry-edit-container > div > textarea {
-        flex: 0 1 70em ;
-        font-size: 1em;
+        flex: 1 2;
+
+        justify-self: stretch;
+        font-size: 140%;
         text-align: left;
-        height: max;
+        margin: 1%;
+        margin-left: 1px;
         
+        
+        /* background-color: rgb(87, 0, 173); */
     }
 
     .button-date-container {
         display: flex;
-        justify-content: flex-end;
-        flex: 1 1;
+        justify-content: space-between;
+        align-self: flex-start;
+        flex: 1 2;
         margin-right: 2em;
-
+        /* background-color: rgb(86, 177, 63); */
+        max-width: 20em;
     }
     .button{
-        flex: 1 1;
+        flex: 0 0;
         max-width: 5em;
         min-width: 5em;
+        max-height: 2.5em;
+        align-self: center;
         margin: 0.5em;
-        order: 1
+        /* background-color: rgb(152, 177, 63); */
     }
 
     .date{
         flex: 1 1;
-        order: 1
+        background-color: rgb(111, 114, 102);
+        margin-right: 2%;
     }
 
 

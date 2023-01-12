@@ -9,14 +9,10 @@
 
 			<!-- logos -->
 			<div>
-				<a  href="https://vitejs.dev" style="order:1"
-					target="_blank">
-
+				<a href="https://vitejs.dev" target="_blank">
 					<img src="/vite.svg" class="logo" alt="Vite logo" />
 				</a>
-				<a  href="https://vuejs.org/" style="order:0"
-					target="_blank">
-					
+				<a href="https://vuejs.org/" target="_blank">
 					<img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
 				</a>
 			</div>
@@ -28,8 +24,7 @@
 			class="input-box" />
 
 		<!-- The add button -->
-		<Button @click="makeNewEntry(newDetails)" 
-			class="add-button">
+		<Button @click="makeNewEntry(newDetails)" class="add-button">
 			Add Note
 		</Button>
 	</div>
@@ -57,11 +52,10 @@
 	.header-bar-box {
 		display: flex;
 		flex-flow: row nowrap;
-		flex: 1 1 60em;
+		flex: 1 1;
 		align-items:center;
-		justify-content: center;
 
-		background-color: #2b1155;
+		background-color: rgb(143, 86, 160);
 		border-radius: 1.5em;
 	}
 
@@ -72,7 +66,7 @@
 		font-size: 1.5em;
 	}
 	.add-button {
-		flex: 1 0;
+		flex: 0 0;
 		margin-left: 1em;
 		margin-right: 1em;
 		max-width: 10em;
@@ -84,7 +78,7 @@
 		justify-content:center;
 		flex-flow: column nowrap;
 
-		flex: 0 1 7em;
+		flex: 0 0 7em;
 		order: 0;
 		margin-top: -10px;
 
