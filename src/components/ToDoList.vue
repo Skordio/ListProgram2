@@ -2,7 +2,7 @@
     <!-- Top Bar, fixed to top of screen -->
     <!-- WIP, will get rid of styling -->
     <div class="header-bar-container">
-        <ToDoEntryBox />
+        <ToDoEntryBox :entriesList="list"/>
     </div>
     
     <!-- List, -->
