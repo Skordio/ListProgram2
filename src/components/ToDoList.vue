@@ -14,21 +14,33 @@
 <script lang="ts">
     import ToDoEntriesList from './ToDoEntriesList.vue'
     import ToDoEntryBox from './ToDoEntryBox.vue';
-    import ToDoEntryInterface from './types/'
+    import {LooseToDoEntry} from './types'
     import { onMounted, ref, reactive, defineComponent } from 'vue'
     export default defineComponent({
         props: {
-            list: Array<ToDoEntryInterface>
+            list: Array<LooseToDoEntry>
         },
         components: {
             ToDoEntriesList,
             ToDoEntryBox
         },
         setup(props) {
+            //this does not work yet, the idea was to fix entries that don't come in with a good id or date
+			let fixEntries = () => {
+				if(props.list)
+					for(var i = 0; i < props.list.length; i++)
+					{
+						props.list[i].id = props.list[props.list.length-1].id! + 1
+						if(!('created' in props.list[i])) {
+							props.list[i]["created"] = new Date();
+						}
+					}
+			}
+            onMounted(() => {
+				//fixEntries();
+			})
         }
     })
-
-    
 </script>
 
 <style>
@@ -51,9 +63,21 @@
     display: flex;
     flex-flow: column;
 
-    top: 12%;
+    top: 11.7%;
     left: 1em;
     right: 1em;
     position: absolute;
+}
+@media (max-width: 1000px) {
+    .entry-list-container {
+        /* background-color: #929194; */
+        display: flex;
+        flex-flow: column;
+
+        top: 12.5%;
+        left: 1em;
+        right: 1em;
+        position: absolute;
+    }
 }
 </style>

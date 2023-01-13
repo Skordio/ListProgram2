@@ -13,11 +13,11 @@
 <script lang="ts">
 	import ToDoEntry from "./Entry.vue"
 	import ToDoList from "./ToDoList.vue"
-    import ToDoEntryInterface from './types'
+    import {LooseToDoEntry} from './types'
 	import {onMounted, ref, defineComponent} from 'vue'
 	export default defineComponent({
 		props: {
-			entriesList: Array<ToDoEntryInterface>
+			entriesList: Array<LooseToDoEntry>
 		},
 		components: {
 			ToDoEntry
@@ -25,7 +25,7 @@
 		setup(props, {emit}) {
 			let makeNewEntry = (message: string, created: Date) => {
 				if(todoEntries.value)
-					todoEntries.value.push({details: message, created: created, id: todoEntries.value[todoEntries.value.length-1].id + 1})
+					todoEntries.value.push({details: message, created: created, id: todoEntries.value[todoEntries.value.length-1].id! + 1})
 			}
 			let deleteEntry = (index: number) => {
 				if(todoEntries.value)
@@ -35,16 +35,7 @@
 				if(todoEntries.value)
 					todoEntries.value[index].details = message;
 			}
-			let fixEntries = () => {
-				if(props.entriesList)
-					for(var i = 0; i < props.entriesList.length; i++)
-					{
-						props.entriesList[i].id = newEntryId.value++
-						if(!props.entriesList[i].created) {
-							props.entriesList[i].created = new Date();
-						}
-					}
-			}
+			
 
 			const todoEntries = ref(props.entriesList)
 			const newDetails = ref('')
@@ -52,9 +43,6 @@
 			const currentEntryCharacters = ref(0)
 
 			
-			onMounted(() => {
-				fixEntries();
-			})
 
 			return {
 				makeNewEntry,

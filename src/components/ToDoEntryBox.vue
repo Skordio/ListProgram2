@@ -32,17 +32,17 @@
 
 <script lang="ts">
 	import {ref, defineComponent } from 'vue'
-	import ToDoEntryInterface from './types'
+	import {LooseToDoEntry} from './types'
 	export default defineComponent({
 		props: {
-			entriesList: Array<ToDoEntryInterface>
+			entriesList: Array<LooseToDoEntry>
 		},
 		setup(props, {emit}) {
 			const newDetails = ref('')
 			
 			let makeNewEntry = (message: string) => {
 				if(props.entriesList)
-					props.entriesList.push({details: message, created: new Date(), id: props.entriesList[props.entriesList.length-1].id + 1})
+					props.entriesList.push({details: message, created: new Date(), id: props.entriesList[props.entriesList.length-1].id! + 1})
 			}
 			return {
 				makeNewEntry,
