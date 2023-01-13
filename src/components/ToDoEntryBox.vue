@@ -34,7 +34,6 @@
 	import {ref, defineComponent } from 'vue'
 	import {LooseToDoEntry} from './types'
 	export default defineComponent({
-		emits: [ 'makeNewEntry' ],
 		props: {
 			entriesList: Array<LooseToDoEntry>
 		},
@@ -42,10 +41,7 @@
 			const newDetails = ref('')
 			
 			let makeNewEntry = (message: string) => {
-				if(props.entriesList != null)
-					props.entriesList.push({details: message, created: new Date(), id: props.entriesList[props.entriesList.length-1].id! + 1})
-				else	
-					emit('makeNewEntry', message)
+					props.entriesList!.push({details: message, created: new Date(), id: props.entriesList![props.entriesList!.length-1].id! + 1})
 			}
 			return {
 				makeNewEntry,
