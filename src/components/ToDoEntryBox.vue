@@ -55,7 +55,7 @@
 		flex: 1 1;
 		align-items:center;
 
-		background-color: rgb(143, 86, 160);
+		background-color: rgb(59, 19, 71);
 		border-radius: 1.5em;
 	}
 

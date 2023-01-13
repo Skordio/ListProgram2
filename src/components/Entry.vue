@@ -16,8 +16,9 @@
             
             <!-- Date -->
             <p  class="date" >
-
-                {{created.toLocaleTimeString()}} {{created.toLocaleDateString()}} 
+                <!--    this line here would not work without the exclamation points, 
+                        is that okay or have I done something wrong? -->
+                {{created!.toLocaleTimeString()}} {{created!.toLocaleDateString()}} 
             </p>
             <!-- Buttons -->
             <div class="two-buttons-container">
@@ -29,74 +30,49 @@
 
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import ToDoList from './ToDoList.vue';
-export default defineComponent({
-    methods: {
-        deleteThisEntry() {
-            this.$emit('delete')
-        },
-        editThisEntry() {
-            if(this.editingPreview) {
-                this.zvalue = 10;
-                this.$emit('edit', this.editedMessage)
-                this.editingPreview = false;
-            } else {
-                this.zvalue = -20;
-                this.editingPreview = true;
-            }
-        }
-    },
-    data() {
-        return {
-            editingPreview: false,
-            editedMessage: this.details,
-            created: new Date(),
-            zvalue: 10 //the z value for the note details
-        }
-    }
-})
-
-
-</script>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
 import ToDoList from './ToDoList.vue';
 export default defineComponent({
+    emits: ['edit','delete'],
     props: {
         details: String,
-        characters: Number,
+        created: Date,
         key: Number
     },
     setup(props, {emit}) {
+        const editingPreview = ref(false);
+        const editedMessage = ref(props.details)
+        const created = ref(props.created);
+        if(!created) {
+            const created = ref(new Date)
+        }
+        const key = ref(0)
+        const zvalue = ref(10)
+
         let deleteThisEntry = () => {
-            this.$emit('delete')
+            emit('delete')
         }
         let editThisEntry = () => {
-            if(this.editingPreview) {
-                this.zvalue = 10;
-                this.$emit('edit', this.editedMessage)
-                this.editingPreview = false;
+            if(editingPreview.value == true) {
+                zvalue.value = 10;
+                emit('edit', editedMessage)
+                editingPreview.value = false;
             } else {
-                this.zvalue = -20;
-                this.editingPreview = true;
+                zvalue.value = -20;
+                editingPreview.value = true;
             }
-            
-            //FIXME
-            const details = ref('')
-            const characters = ref(0)
-            const key = ref(0)
-            const editedMessage = 
-            return {
-                deleteThisEntry,
-                makeNewEntry,
-                details,
-                characters,
-                key
-            }
-        },
+        }
+        return {
+            deleteThisEntry,
+            editThisEntry,
+            editingPreview,
+            editedMessage,
+            created,
+            key,
+            zvalue
+        }
     }
 })
 
@@ -115,7 +91,7 @@ export default defineComponent({
         flex: 1 0;
         
         
-        background-color: #2b1155;
+        background-color: #825fb9;
 		border-radius: 2em;
     }
 
