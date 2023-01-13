@@ -7,7 +7,8 @@
 			:highlighted="entry.highlighted"
 			@edit="(message: string) => editEntry(index, message)"
 			@delete="deleteEntry(index)"
-			@highlight="hightlightEntry(index)"
+			@highlight="highlightEntries(index)"
+			@highlight-me="highlightEntry(index)"
 		/>
 	</div>
 </template>
@@ -37,7 +38,14 @@
 				if(todoEntries.value)
 					todoEntries.value[index].details = message;
 			}
-			let hightlightEntry = (index: number) => {
+			let highlightEntries = (index: number) => {
+				if(todoEntries.value && mouseDown)
+					if(todoEntries.value[index].highlighted)
+						todoEntries.value[index].highlighted = false;
+					else
+						todoEntries.value[index].highlighted = true;
+			}
+			let highlightEntry = (index: number) => {
 				if(todoEntries.value)
 					if(todoEntries.value[index].highlighted)
 						todoEntries.value[index].highlighted = false;
@@ -51,17 +59,25 @@
 			const newEntryId = ref(0)
 			const currentEntryCharacters = ref(0)
 
-			
+			var mouseDown = 0;
+			document.body.onmousedown = function() { 
+			++mouseDown;
+			}
+			document.body.onmouseup = function() {
+			--mouseDown;
+			}
 
 			return {
 				makeNewEntry,
 				deleteEntry,
 				editEntry,
-				hightlightEntry,
+				highlightEntries,
+				highlightEntry,
 				todoEntries,
 				newDetails,
 				newEntryId,
-				currentEntryCharacters
+				currentEntryCharacters,
+				mouseDown
 			}
 		},
 		

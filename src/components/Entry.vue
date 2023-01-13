@@ -6,16 +6,16 @@
                 <!-- Input for edits -->
                 <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
             </div>
-            <div @click="highlightThisEntry()">
+            <div @mouseenter="$emit('highlight')" @mousedown="$emit('highlightMe')">
                 <!-- Note details -->
-                <p  v-show="editingPreview == false"> {{ details }} </p>
+                <p  v-show="editingPreview == false" class="noselect"> {{ details }} </p>
             </div>
         </div>
 
         <div class="button-date-container">
             
             <!-- Date -->
-            <p  class="date" >
+            <p  class="date noselect" >
                 <!--    this line here would not work without the exclamation points, 
                         is that okay or have I done something wrong? -->
                 {{created!.toLocaleTimeString()}} {{created!.toLocaleDateString()}} 
@@ -35,7 +35,7 @@
 import { ref, defineComponent } from 'vue'
 import ToDoList from './ToDoEntriesList.vue';
 export default defineComponent({
-    emits: ['edit','delete','highlight'],
+    emits: ['edit','delete','highlight','highlightMe'],
     props: {
         details: String,
         created: Date,
@@ -65,13 +65,10 @@ export default defineComponent({
                 editingPreview.value = true;
             }
         }
-        let highlightThisEntry = () => {
-            emit('highlight')
-        }
+        
         return {
             deleteThisEntry,
             editThisEntry,
-            highlightThisEntry,
             editingPreview,
             editedMessage,
             created,
@@ -100,6 +97,16 @@ export default defineComponent({
 		border-radius: 2em;
     }
     
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                    user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome, Edge, Opera and Firefox */
+    }
+
     .entry-container-highlighted{
         background-color: #825fb9;
     }
