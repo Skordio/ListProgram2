@@ -1,51 +1,29 @@
 
 <template>
-    <!-- Top Bar, fixed to top of screen -->
-    <!-- WIP, will get rid of styling -->
-    <div class="header-bar-container">
-        <ToDoEntryBox @makeNew="(message:string) => entrylist.makeNewEntry(message)"/>
-    </div>
-    
     <!-- List, -->
     <div class="entry-list-container">
-        <ToDoList ref="entrylist"/>
+        <ToDoList :list="newList"/>
     </div>
 </template>
 
 <script lang="ts">
     import ToDoList from './components/ToDoList.vue'
-    import ToDoEntryBox from './components/ToDoEntryBox.vue';
-    import { ref, reactive, defineComponent } from 'vue'
+    import ToDoEntryInterface from './components'
+    import { ref, defineComponent } from 'vue'
     export default defineComponent({
         components: {
-            ToDoList,
-            ToDoEntryBox
+            ToDoList
         },
         setup(props) {
-            const entrylist = reactive(ToDoList)
+            const newList = ref([{details: "Make new todo list app", created: new Date(), id:  1},{details: "Make Coffee", created: new Date(2012), id: 2}])
             return {
-                // makeNewEntry,
-                entrylist
+                newList
             }
         }
     })
 </script>
 
 <style>
-/* this flexbox is for positioning at top of screen */
-.header-bar-container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    overflow: hidden;
-
-    top: 1.5em;
-    left: 1.5em;
-    right: 1.5em;
-    position: fixed;
-    z-index: 1;
-}
-
 .entry-list-container {
     /* background-color: #929194; */
     display: flex;
@@ -57,3 +35,5 @@
     position: absolute;
 }
 </style>
+
+

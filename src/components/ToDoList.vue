@@ -1,48 +1,59 @@
 <template>
-	<div class="entry-list-container">
-		<ToDoEntry v-for="(entry, index) in todoEntries"
-			:details="entry.details"
-			:created="new Date()"
-			:key="entry.id"
-			@edit="(message: string) => editEntry(index, message)"
-			@delete="deleteEntry(index)"
-		/>
-	</div>
+    <!-- Top Bar, fixed to top of screen -->
+    <!-- WIP, will get rid of styling -->
+    <div class="header-bar-container">
+        <ToDoEntryBox />
+    </div>
+    
+    <!-- List, -->
+    <div class="entry-list-container">
+        <ToDoEntriesList :entriesList="list"/>
+    </div>
 </template>
 
 <script lang="ts">
-import ToDoEntry from "./Entry.vue"
-import {ref, defineComponent} from 'vue'
-export default defineComponent({
-	components: {
-		ToDoEntry
-	},
-	setup(props) {
-		let makeNewEntry = (message: string) => {
-			todoEntries.value.push({details: message, id: newEntryId.value++})
-		}
-		let deleteEntry = (index: number) => {
-			todoEntries.value.splice(index, 1)
-		}
-		let editEntry = (index: number, message: string) => {
-			todoEntries.value[index].details = message;
-		}
+    import ToDoEntriesList from './ToDoEntriesList.vue'
+    import ToDoEntryBox from './ToDoEntryBox.vue';
+    import ToDoEntryInterface from './index'
+    import { onMounted, ref, reactive, defineComponent } from 'vue'
+    export default defineComponent({
+        props: {
+            list: Array<ToDoEntryInterface>
+        },
+        components: {
+            ToDoEntriesList,
+            ToDoEntryBox
+        },
+        setup(props) {
+        }
+    })
 
-		const todoEntries = ref([{details: 'Make Todo List App', id: 0}, 
-				{details: 'Make coffee', id: 1}])
-		const newDetails = ref('')
-		const newEntryId = ref(2)
-		const currentEntryCharacters = ref(0)
-
-		return {
-			makeNewEntry,
-			deleteEntry,
-			editEntry,
-			todoEntries,
-			newDetails,
-			newEntryId,
-			currentEntryCharacters
-		}
-	}
-})
+    
 </script>
+
+<style>
+/* this flexbox is for positioning at top of screen */
+.header-bar-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    overflow: hidden;
+
+    top: 1.5em;
+    left: 1.5em;
+    right: 1.5em;
+    position: fixed;
+    z-index: 1;
+}
+
+.entry-list-container {
+    /* background-color: #929194; */
+    display: flex;
+    flex-flow: column;
+
+    top: 13%;
+    left: 2em;
+    right: 2em;
+    position: absolute;
+}
+</style>

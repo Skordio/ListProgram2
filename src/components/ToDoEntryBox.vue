@@ -32,11 +32,17 @@
 
 <script lang="ts">
 	import {ref, defineComponent } from 'vue'
+	import ToDoEntryInterface from '.'
 	export default defineComponent({
+		props: {
+			entriesList: Array<ToDoEntryInterface>
+		},
 		setup(props, {emit}) {
 			const newDetails = ref('')
-			let makeNewEntry = (message:string) => {
-				emit('makeNew', message)
+			
+			let makeNewEntry = (message: string) => {
+				if(props.entriesList)
+					props.entriesList.push({details: message, created: new Date(), id: props.entriesList[props.entriesList.length-1].id + 1})
 			}
 			return {
 				makeNewEntry,

@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
-import ToDoList from './ToDoList.vue';
+import ToDoList from './ToDoEntriesList.vue';
 export default defineComponent({
     emits: ['edit','delete'],
     props: {
