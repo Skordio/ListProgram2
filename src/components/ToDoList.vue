@@ -30,9 +30,10 @@
 				if(props.list)
 					for(var i = 0; i < props.list.length; i++)
 					{
-						props.list[i].id = props.list[props.list.length-1].id! + 1
+                        props.list[i].id = i
+                        props.list[i].highlighted = false;
 						if(!('created' in props.list[i])) {
-							props.list[i]["created"] = new Date();
+							props.list[i].created = new Date()
 						}
 					}
 			}

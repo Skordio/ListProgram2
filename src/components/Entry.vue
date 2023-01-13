@@ -1,12 +1,12 @@
 <template>
     
-	<div class="entry-container">
+	<div class="entry-container" v-bind:class="{ 'entry-container-highlighted': highlighted }" >
         <div   class="entry-edit-container">
             <div>
                 <!-- Input for edits -->
                 <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
             </div>
-            <div>
+            <div @click="highlightThisEntry()">
                 <!-- Note details -->
                 <p  v-show="editingPreview == false"> {{ details }} </p>
             </div>
@@ -35,11 +35,12 @@
 import { ref, defineComponent } from 'vue'
 import ToDoList from './ToDoEntriesList.vue';
 export default defineComponent({
-    emits: ['edit','delete'],
+    emits: ['edit','delete','highlight'],
     props: {
         details: String,
         created: Date,
-        key: Number
+        key: Number,
+        highlighted: Boolean
     },
     setup(props, {emit}) {
         const editingPreview = ref(false);
@@ -64,9 +65,13 @@ export default defineComponent({
                 editingPreview.value = true;
             }
         }
+        let highlightThisEntry = () => {
+            emit('highlight')
+        }
         return {
             deleteThisEntry,
             editThisEntry,
+            highlightThisEntry,
             editingPreview,
             editedMessage,
             created,
@@ -91,8 +96,12 @@ export default defineComponent({
         flex: 1 0;
         
         
-        background-color: #825fb9;
+        background-color: #3f1780;
 		border-radius: 2em;
+    }
+    
+    .entry-container-highlighted{
+        background-color: #825fb9;
     }
 
     .entry-edit-container {
@@ -118,6 +127,9 @@ export default defineComponent({
         word-wrap: break-word;
         font-size: 140%;
         text-align: left;
+        padding: .8em;
+        margin: 0.2em;
+        margin-left: -.8em;
         
         /* background-color: rgb(87, 0, 173); */
     }
@@ -168,6 +180,7 @@ export default defineComponent({
         .entry-edit-container > div > p {
             word-wrap: break-word;
             font-size: 100%;
+            margin-left: 0em;
         }
         .entry-edit-container > div > textarea {
             font-size: 100%;

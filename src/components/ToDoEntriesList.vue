@@ -4,8 +4,10 @@
 			:details="entry.details"
 			:created="new Date()"
 			:key="entry.id"
+			:highlighted="entry.highlighted"
 			@edit="(message: string) => editEntry(index, message)"
 			@delete="deleteEntry(index)"
+			@highlight="hightlightEntry(index)"
 		/>
 	</div>
 </template>
@@ -35,6 +37,13 @@
 				if(todoEntries.value)
 					todoEntries.value[index].details = message;
 			}
+			let hightlightEntry = (index: number) => {
+				if(todoEntries.value)
+					if(todoEntries.value[index].highlighted)
+						todoEntries.value[index].highlighted = false;
+					else
+						todoEntries.value[index].highlighted = true;
+			}
 			
 
 			const todoEntries = ref(props.entriesList)
@@ -48,6 +57,7 @@
 				makeNewEntry,
 				deleteEntry,
 				editEntry,
+				hightlightEntry,
 				todoEntries,
 				newDetails,
 				newEntryId,
