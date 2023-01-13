@@ -38,7 +38,7 @@
 					}
 			}
             onMounted(() => {
-				//fixEntries();
+				fixEntries();
 			})
         }
     })

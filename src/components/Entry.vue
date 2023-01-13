@@ -93,7 +93,7 @@ export default defineComponent({
         flex: 1 0;
         
         
-        background-color: #3f1780;
+        background-color: #825fb9;
 		border-radius: 2em;
     }
     
@@ -108,7 +108,7 @@ export default defineComponent({
     }
 
     .entry-container-highlighted{
-        background-color: #825fb9;
+        background-color: #3f1780;
     }
 
     .entry-edit-container {
