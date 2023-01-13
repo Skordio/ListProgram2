@@ -14,7 +14,7 @@
 <script lang="ts">
     import ToDoEntriesList from './ToDoEntriesList.vue'
     import ToDoEntryBox from './ToDoEntryBox.vue';
-    import ToDoEntryInterface from './index'
+    import ToDoEntryInterface from './types/'
     import { onMounted, ref, reactive, defineComponent } from 'vue'
     export default defineComponent({
         props: {
@@ -51,9 +51,9 @@
     display: flex;
     flex-flow: column;
 
-    top: 13%;
-    left: 2em;
-    right: 2em;
+    top: 12%;
+    left: 1em;
+    right: 1em;
     position: absolute;
 }
 </style>

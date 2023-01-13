@@ -1,5 +1,5 @@
 <template>
-	<div class="entry-list-container">
+	<div>
 		<ToDoEntry v-for="(entry, index) in todoEntries"
 			:details="entry.details"
 			:created="new Date()"
@@ -13,7 +13,7 @@
 <script lang="ts">
 	import ToDoEntry from "./Entry.vue"
 	import ToDoList from "./ToDoList.vue"
-    import ToDoEntryInterface from './'
+    import ToDoEntryInterface from './types'
 	import {onMounted, ref, defineComponent} from 'vue'
 	export default defineComponent({
 		props: {
@@ -35,11 +35,26 @@
 				if(todoEntries.value)
 					todoEntries.value[index].details = message;
 			}
+			let fixEntries = () => {
+				if(props.entriesList)
+					for(var i = 0; i < props.entriesList.length; i++)
+					{
+						props.entriesList[i].id = newEntryId.value++
+						if(!props.entriesList[i].created) {
+							props.entriesList[i].created = new Date();
+						}
+					}
+			}
 
 			const todoEntries = ref(props.entriesList)
 			const newDetails = ref('')
 			const newEntryId = ref(0)
 			const currentEntryCharacters = ref(0)
+
+			
+			onMounted(() => {
+				fixEntries();
+			})
 
 			return {
 				makeNewEntry,
@@ -54,30 +69,4 @@
 		
 	})
 	const newEntryId = ref(0)
-	const props = defineProps({
-			entriesList: Array<ToDoEntryInterface>
-		})
-	onMounted(() => {
-		if(props.entriesList)
-			for(var i = 0; i < props.entriesList.length; i++)
-			{
-				props.entriesList[i].id = newEntryId.value++
-				if(!props.entriesList[i].created) {
-					props.entriesList[i].created = new Date();
-				}
-			}
-	})
 </script>
-
-<style>
-.entry-list-container {
-    /* background-color: #929194; */
-    display: flex;
-    flex-flow: column;
-
-    top: 13%;
-    left: 2em;
-    right: 2em;
-    position: absolute;
-}
-</style>

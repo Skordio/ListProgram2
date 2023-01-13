@@ -32,7 +32,7 @@
 
 <script lang="ts">
 	import {ref, defineComponent } from 'vue'
-	import ToDoEntryInterface from '.'
+	import ToDoEntryInterface from './types'
 	export default defineComponent({
 		props: {
 			entriesList: Array<ToDoEntryInterface>

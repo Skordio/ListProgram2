@@ -8,7 +8,6 @@
 
 <script lang="ts">
     import ToDoList from './components/ToDoList.vue'
-    import ToDoEntryInterface from './components'
     import { ref, defineComponent } from 'vue'
     export default defineComponent({
         components: {
@@ -24,14 +23,14 @@
 </script>
 
 <style>
-.entry-list-container {
-    /* background-color: #929194; */
+.todo-list-container {
+    background-color: #929194;
     display: flex;
     flex-flow: column;
 
-    top: 13%;
-    left: 2em;
-    right: 2em;
+    top: 1em;
+    left: 1em;
+    right: 1em;
     position: absolute;
 }
 </style>
