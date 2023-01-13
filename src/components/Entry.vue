@@ -48,11 +48,6 @@ export default defineComponent({
             }
         }
     },
-    props: {
-        details: String,
-        characters: Number,
-        key: Number
-    },
     data() {
         return {
             editingPreview: false,
@@ -65,6 +60,49 @@ export default defineComponent({
 
 
 </script>
+
+<script lang="ts">
+import { ref, defineComponent } from 'vue'
+import ToDoList from './ToDoList.vue';
+export default defineComponent({
+    props: {
+        details: String,
+        characters: Number,
+        key: Number
+    },
+    setup(props, {emit}) {
+        let deleteThisEntry = () => {
+            this.$emit('delete')
+        }
+        let editThisEntry = () => {
+            if(this.editingPreview) {
+                this.zvalue = 10;
+                this.$emit('edit', this.editedMessage)
+                this.editingPreview = false;
+            } else {
+                this.zvalue = -20;
+                this.editingPreview = true;
+            }
+            
+            //FIXME
+            const details = ref('')
+            const characters = ref(0)
+            const key = ref(0)
+            const editedMessage = 
+            return {
+                deleteThisEntry,
+                makeNewEntry,
+                details,
+                characters,
+                key
+            }
+        },
+    }
+})
+
+
+</script>
+
 
 <style>
     .entry-container{
