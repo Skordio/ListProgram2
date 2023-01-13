@@ -4,7 +4,6 @@
 			:details="entry.details"
 			:created="new Date()"
 			:key="entry.id"
-			:characters="entry.details.length"
 			@edit="(message: string) => editEntry(index, message)"
 			@delete="deleteEntry(index)"
 		/>
