@@ -52,8 +52,8 @@
     flex-flow: column;
 
     top: 13%;
-    left: 2.5em;
-    right: 2.5em;
+    left: 2em;
+    right: 2em;
     position: absolute;
 }
 </style>

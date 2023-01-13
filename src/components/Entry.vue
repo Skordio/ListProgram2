@@ -15,13 +15,15 @@
         <div class="button-date-container">
             
             <!-- Date -->
-            <p  style=" font-size: 1em;" >
+            <p  class="date" >
 
                 {{created.toLocaleTimeString()}} {{created.toLocaleDateString()}} 
             </p>
             <!-- Buttons -->
-            <button class="button" @click="editThisEntry()">Edit</button>
-            <button class="button" @click="deleteThisEntry()">Delete</button>
+            <div class="two-buttons-container">
+                <button class="edit button" @click="editThisEntry()">Edit</button>
+                <button class="delete button" @click="deleteThisEntry()">Delete</button>
+            </div>
         </div>
     </div>
 
@@ -65,7 +67,6 @@ export default defineComponent({
 </script>
 
 <style>
-
     .entry-container{
         display: flex;
         flex-flow: row nowrap;
@@ -82,6 +83,9 @@ export default defineComponent({
 
     .entry-edit-container {
         flex: 2 1;
+        margin-top: -1%;
+        margin-bottom: -1%;
+        margin-left: 0%;
         /* background-color: rgb(166, 165, 167); */
     }
 
@@ -111,6 +115,7 @@ export default defineComponent({
         font-size: 140%;
         text-align: left;
         margin: 1%;
+        
         margin-left: 1px;
         
         
@@ -119,27 +124,65 @@ export default defineComponent({
 
     .button-date-container {
         display: flex;
-        justify-content: space-between;
         align-self: flex-start;
-        flex: 1 2;
-        margin-right: 2em;
+        margin-right: 1em;
         /* background-color: rgb(86, 177, 63); */
         max-width: 20em;
     }
     .button{
         flex: 0 0;
-        max-width: 5em;
-        min-width: 5em;
-        max-height: 2.5em;
         align-self: center;
-        margin: 0.5em;
+        margin: 1%;
         /* background-color: rgb(152, 177, 63); */
     }
 
     .date{
         flex: 1 1;
-        background-color: rgb(111, 114, 102);
+        /* background-color: rgb(111, 114, 102); */
+        margin-top: 1%;
+        margin-bottom: 1%;
         margin-right: 2%;
+        min-width: 6em;
+        text-align: right;
+
+    }
+    .two-buttons-container {
+        display: flex;
+    }
+
+    @media (max-width: 1000px) {
+        .entry-edit-container > div > p {
+            word-wrap: break-word;
+            font-size: 100%;
+        }
+        .entry-edit-container > div > textarea {
+            font-size: 100%;
+        }
+        
+        .button-date-container {
+            display: flex;
+            flex-flow: column;
+            align-content: center;
+            align-self: flex-start;
+            flex: 0 0;
+            margin-right: 1em;
+        }
+        .date{
+            flex: 0 0;
+            font-size: smaller;
+            min-width: 12em;
+            text-align: center;
+
+        }
+        .delete{
+            padding-right: 30%;
+        }
+        .button{
+            flex: 1 1;
+            min-width: 4em;
+            height: 1.5em;
+            padding-top: 1%;
+        }
     }
 
 
