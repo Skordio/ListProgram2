@@ -61,10 +61,19 @@
 
 			var mouseDown = 0;
 			document.body.onmousedown = function() { 
-			++mouseDown;
+				if(mouseDown == 0)
+					++mouseDown;
+				else
+					mouseDown = 1;
 			}
 			document.body.onmouseup = function() {
-			--mouseDown;
+				if(mouseDown == 1)
+					--mouseDown;
+				else
+					mouseDown = 0;
+			}
+			document.body.onmouseenter = function() {
+					mouseDown = 0;
 			}
 
 			return {
