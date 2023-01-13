@@ -2,7 +2,7 @@
     <!-- Top Bar, fixed to top of screen -->
     <!-- WIP, will get rid of styling -->
     <div class="header-bar-container">
-        <ToDoEntryBox :entriesList="list" @make-new-entry="(message:string) => {createEntry(message)}"/>
+        <ToDoEntryBox :entriesList="list" />
     </div>
     
     <!-- List, -->
@@ -46,16 +46,11 @@
 						}
 					}
 			}
-            let createEntry = (message: string) => {
-                if(props.list)
-                    props.list.push({details: message, created: new Date(), id: props.list[props.list.length-1].id! + 1})
-            }
             onMounted(() => {
 				fixEntries();
 			})
             return {
-                deleteHighlightedEntries,
-                createEntry
+                deleteHighlightedEntries
             }
         }
     })
