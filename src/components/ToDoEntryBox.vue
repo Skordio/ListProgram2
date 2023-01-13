@@ -3,7 +3,7 @@
 	<div class="header-bar-box">
 		<!-- container element for logos and text, this is just one
 			item in the main header container -->
-		<div class="logobox">
+		<div class="logobox noselect">
 			<!-- little "Powered by" text element-->
 			<p> Powered By: </p>
 
@@ -34,6 +34,7 @@
 	import {ref, defineComponent } from 'vue'
 	import {LooseToDoEntry} from './types'
 	export default defineComponent({
+		emits: [ 'makeNewEntry' ],
 		props: {
 			entriesList: Array<LooseToDoEntry>
 		},
@@ -41,8 +42,10 @@
 			const newDetails = ref('')
 			
 			let makeNewEntry = (message: string) => {
-				if(props.entriesList)
+				if(props.entriesList != null)
 					props.entriesList.push({details: message, created: new Date(), id: props.entriesList[props.entriesList.length-1].id! + 1})
+				else	
+					emit('makeNewEntry', message)
 			}
 			return {
 				makeNewEntry,
@@ -76,6 +79,17 @@
 		margin-left: 1em;
 		margin-right: 1em;
 		max-width: 10em;
+	}
+	
+    
+	.noselect {
+		-webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Safari */
+			-khtml-user-select: none; /* Konqueror HTML */
+			-moz-user-select: none; /* Old versions of Firefox */
+				-ms-user-select: none; /* Internet Explorer/Edge */
+					user-select: none; /* Non-prefixed version, currently
+										supported by Chrome, Edge, Opera and Firefox */
 	}
 
 	/* container for whole 'powered by' section */

@@ -2,12 +2,15 @@
     <!-- Top Bar, fixed to top of screen -->
     <!-- WIP, will get rid of styling -->
     <div class="header-bar-container">
-        <ToDoEntryBox :entriesList="list"/>
+        <ToDoEntryBox :entriesList="list" @make-new-entry="(message:string) => {createEntry(message)}"/>
     </div>
     
     <!-- List, -->
     <div class="entry-list-container">
         <ToDoEntriesList :entriesList="list"/>
+    </div>
+    <div class="ui-container">
+        <button @click="deleteHighlightedEntries">Delete Selected</button>
     </div>
 </template>
 
@@ -26,10 +29,16 @@
         },
         setup(props) {
             //this does not work yet, the idea was to fix entries that don't come in with a good id or date
+            let deleteHighlightedEntries = () => {
+				if(props.list)
+					for (var i = 0; i < props.list.length; i++) {
+                        if(props.list[i].highlighted)
+                            props.list.splice(i, 1)
+                    }
+            }
 			let fixEntries = () => {
 				if(props.list)
-					for(var i = 0; i < props.list.length; i++)
-					{
+					for(var i = 0; i < props.list.length; i++) {
                         props.list[i].id = i
                         props.list[i].highlighted = false;
 						if(!('created' in props.list[i])) {
@@ -37,9 +46,17 @@
 						}
 					}
 			}
+            let createEntry = (message: string) => {
+                if(props.list)
+                    props.list.push({details: message, created: new Date(), id: props.list[props.list.length-1].id! + 1})
+            }
             onMounted(() => {
 				fixEntries();
 			})
+            return {
+                deleteHighlightedEntries,
+                createEntry
+            }
         }
     })
 </script>
@@ -64,21 +81,22 @@
     display: flex;
     flex-flow: column;
 
-    top: 11.7%;
+    top: 3.5em;
     left: 1em;
-    right: 1em;
+    right: 5em;
     position: absolute;
 }
-@media (max-width: 1000px) {
-    .entry-list-container {
-        /* background-color: #929194; */
-        display: flex;
-        flex-flow: column;
 
-        top: 12.5%;
-        left: 1em;
-        right: 1em;
-        position: absolute;
-    }
+.ui-container {
+    display: flex;
+    flex-flow: column;
+    position: fixed;
+    top: 7.3em;
+    right: 2em;
+    width: 6em;
+    padding: .5em;
+
+    background-color: rgb(29, 104, 168);
+    border-radius: 1em;
 }
 </style>
