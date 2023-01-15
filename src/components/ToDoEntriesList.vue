@@ -35,18 +35,23 @@
 					todoEntries.value[index].details = message;
 			}
 			let highlightEntries = (index: number) => {
-				if(todoEntries.value && mouseDown)
-					if(todoEntries.value[index].highlighted)
+				if(todoEntries.value && mouseDown) {
+					if(todoEntries.value[index].highlighted && dehighlighting.value)
 						todoEntries.value[index].highlighted = false;
-					else
+					else if(!todoEntries.value[index].highlighted && !dehighlighting.value)
 						todoEntries.value[index].highlighted = true;
+				}
 			}
 			let highlightEntry = (index: number) => {
 				if(todoEntries.value)
-					if(todoEntries.value[index].highlighted)
+					if(todoEntries.value[index].highlighted) {
 						todoEntries.value[index].highlighted = false;
-					else
+						dehighlighting.value = true;
+					}
+					else {
 						todoEntries.value[index].highlighted = true;
+						dehighlighting.value = false;
+					}
 			}
 			
 
@@ -54,6 +59,7 @@
 			const newDetails = ref('')
 			const newEntryId = ref(0)
 			const currentEntryCharacters = ref(0)
+			const dehighlighting = ref(true)
 
 			var mouseDown = 0;
 			document.body.onmousedown = function() { 
