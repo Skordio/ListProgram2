@@ -1,7 +1,7 @@
 <template>
     
 	<div class="entry-container" v-bind:class="{ 'entry-container-highlighted': highlighted }" >
-        <div   class="entry-edit-container">
+        <div   class="details-container">
             <div>
                 <!-- Input for edits -->
                 <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
@@ -22,8 +22,10 @@
             </p>
             <!-- Buttons -->
             <div class="two-buttons-container">
-                <button class="edit button" @click="editThisEntry()">Edit</button>
-                <button class="delete button" @click="deleteThisEntry()">Delete</button>
+                <button class="edit button" @click="editThisEntry()"><p class="edit-text">Edit</p></button>
+                <button class="delete button" @click="deleteThisEntry()">
+                    <img src="src\assets\trash.png" alt="Delete" width="20" height="20" class="delete-icon">
+                </button>
             </div>
         </div>
     </div>
@@ -83,6 +85,15 @@ export default defineComponent({
 
 
 <style>
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                    user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome, Edge, Opera and Firefox */
+    }
     .entry-container{
         display: flex;
         flex-flow: row nowrap;
@@ -96,22 +107,11 @@ export default defineComponent({
         background-color: #825fb9;
 		border-radius: 2em;
     }
-    
-    .noselect {
-        -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-                -ms-user-select: none; /* Internet Explorer/Edge */
-                    user-select: none; /* Non-prefixed version, currently
-                                        supported by Chrome, Edge, Opera and Firefox */
-    }
-
     .entry-container-highlighted{
         background-color: #3f1780;
     }
 
-    .entry-edit-container {
+    .details-container {
         flex: 2 1;
         margin-top: -1%;
         margin-bottom: -1%;
@@ -120,7 +120,7 @@ export default defineComponent({
     }
 
     /* applied to both text and input */
-    .entry-edit-container > div {
+    .details-container > div {
         display: flex;
         flex-flow: row nowrap;
         justify-content: flex-start;
@@ -129,7 +129,7 @@ export default defineComponent({
         /* background-color: rgb(13, 10, 15); */
     }
 
-    .entry-edit-container > div > p {
+    .details-container > div > p {
         flex: 1 1;
         word-wrap: break-word;
         font-size: 140%;
@@ -141,7 +141,7 @@ export default defineComponent({
         /* background-color: rgb(87, 0, 173); */
     }
 
-    .entry-edit-container > div > textarea {
+    .details-container > div > textarea {
         flex: 1 2;
 
         justify-self: stretch;
@@ -166,9 +166,9 @@ export default defineComponent({
         flex: 0 0;
         align-self: center;
         margin: 1%;
+        max-height: 2.4em;
         /* background-color: rgb(152, 177, 63); */
     }
-
     .date{
         flex: 1 1;
         /* background-color: rgb(111, 114, 102); */
@@ -177,19 +177,31 @@ export default defineComponent({
         margin-right: 2%;
         min-width: 6em;
         text-align: right;
-
     }
+        .delete{
+            max-width: 1em;
+        }
+        .edit{
+            max-width: 3em;
+        }
+        .edit-text {
+            margin: 0em;
+            margin-left: -0.6em;
+        }
+        .delete-icon{
+            margin-left: -.6em;
+        }
     .two-buttons-container {
         display: flex;
     }
 
     @media (max-width: 1000px) {
-        .entry-edit-container > div > p {
+        .details-container > div > p {
             word-wrap: break-word;
             font-size: 100%;
             margin-left: 0em;
         }
-        .entry-edit-container > div > textarea {
+        .details-container > div > textarea {
             font-size: 100%;
         }
         
@@ -209,13 +221,23 @@ export default defineComponent({
 
         }
         .delete{
-            padding-right: 30%;
+            max-width: 1em;
+        }
+        .edit{
+            max-width: 3em;
+            text-align: center;
+        }
+        .edit-text {
+            margin: 0em;
+            margin-left: -0.6em;
         }
         .button{
             flex: 1 1;
-            min-width: 4em;
             height: 1.5em;
             padding-top: 1%;
+        }
+        .delete-icon{
+            margin-left: -.6em;
         }
     }
 
