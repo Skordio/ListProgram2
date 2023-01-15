@@ -31,7 +31,7 @@
             //this does not work yet, the idea was to fix entries that don't come in with a good id or date
             let deleteHighlightedEntries = () => {
 				if(props.list)
-					for (var i = 0; i < props.list.length; i++) {
+					for (var i = props.list.length-1; i >= 0; i--) {
                         if(props.list[i].highlighted)
                             props.list.splice(i, 1)
                     }

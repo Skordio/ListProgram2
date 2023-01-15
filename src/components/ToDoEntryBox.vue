@@ -20,11 +20,11 @@
 
 		<!-- Input -->
 		<input  v-model="newDetails" placeholder="new note" 
-			@keydown.enter="makeNewEntry(newDetails)" 
+			@keydown.enter="makeNewEntry(newDetails, new Date())" 
 			class="input-box" />
 
 		<!-- The add button -->
-		<Button @click="makeNewEntry(newDetails)" class="add-button">
+		<Button @click="makeNewEntry(newDetails, new Date())" class="add-button">
 			Add Note
 		</Button>
 	</div>
@@ -39,9 +39,14 @@
 		},
 		setup(props, {emit}) {
 			const newDetails = ref('')
+			const todoEntries = ref(props.entriesList)
 			
-			let makeNewEntry = (message: string) => {
-					props.entriesList!.push({details: message, created: new Date(), id: props.entriesList![props.entriesList!.length-1].id! + 1})
+			let makeNewEntry = (message: string, created: Date) => {
+				if(todoEntries.value)
+					if(todoEntries.value.length == 0)
+						todoEntries.value.push({details: message, created: created, id: 0})
+					else
+						todoEntries.value.push({details: message, created: created, id: todoEntries.value[todoEntries.value.length-1].id! + 1})
 			}
 			return {
 				makeNewEntry,
