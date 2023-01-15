@@ -26,10 +26,6 @@
 			ToDoEntry
 		},
 		setup(props, {emit}) {
-			let makeNewEntry = (message: string, created: Date) => {
-				if(todoEntries.value)
-					todoEntries.value.push({details: message, created: created, id: todoEntries.value[todoEntries.value.length-1].id! + 1})
-			}
 			let deleteEntry = (index: number) => {
 				if(todoEntries.value)
 					todoEntries.value.splice(index, 1)
@@ -77,7 +73,6 @@
 			}
 
 			return {
-				makeNewEntry,
 				deleteEntry,
 				editEntry,
 				highlightEntries,

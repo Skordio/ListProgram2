@@ -18,7 +18,7 @@
                 {   details: "Improve new todo list app", 
                     created: new Date(), id:  1},
                 {   details: "Make Coffee", 
-                    created: new Date(2012), id: 2},
+                    created: new Date(), id: 2},
                 {   details: "This list is passed in with props",
                     created: new Date()}])
             return {
