@@ -10,7 +10,10 @@
         <ToDoEntriesList :entriesList="list"/>
     </div>
     <div class="ui-container">
+        <button @click="selectAll">Select All</button>
+        <button @click="deSelectAll">Deselect All</button>
         <button @click="deleteHighlightedEntries">Delete Selected</button>
+
     </div>
 </template>
 
@@ -36,6 +39,22 @@
                             props.list.splice(i, 1)
                     }
             }
+            let selectAll = () => {
+                if(props.list) {
+					for (var i = props.list.length-1; i >= 0; i--) {
+                        if(!props.list[i].highlighted)
+                            props.list[i].highlighted = true;
+                    }
+                }
+            }
+            let deSelectAll = () => {
+                if(props.list) {
+					for (var i = props.list.length-1; i >= 0; i--) {
+                        if(props.list[i].highlighted)
+                            props.list[i].highlighted = false;
+                    }
+                }
+            }
 			let fixEntries = () => {
 				if(props.list)
 					for(var i = 0; i < props.list.length; i++) {
@@ -50,7 +69,9 @@
 				fixEntries();
 			})
             return {
-                deleteHighlightedEntries
+                deleteHighlightedEntries,
+                selectAll,
+                deSelectAll
             }
         }
     })
@@ -90,6 +111,7 @@
     right: 2em;
     width: 6em;
     padding: .5em;
+    gap: 10px;
 
     background-color: rgb(29, 104, 168);
     border-radius: 1em;
