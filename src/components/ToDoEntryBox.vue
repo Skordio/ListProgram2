@@ -42,8 +42,8 @@
 									highlighted: false, 
 									done: false, 
 									estTime: 0}
-					if(!(props.list.length == 0))
-						newEntry.id = props.list[props.list.length].id!;
+					if(props.list.length > 0)
+						newEntry.id = props.list[props.list.length-1].id! + 1;
 					props.list.push(newEntry)
 				}
 			}
@@ -69,7 +69,7 @@
 		background-color: rgb(59, 19, 71);
 		border-radius: 1.5em;
 	}
-	
+
 	.logobox {
 		display: flex;
 		justify-content:center;

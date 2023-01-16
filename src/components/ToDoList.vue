@@ -5,7 +5,7 @@
     
     <div class="entry-list-container">
         <ToDoEntriesList 
-        :entriesList="list"
+        :list="list"
         @time-edit="timeCalc"/>
     </div>
 
@@ -13,8 +13,8 @@
         <button @click="selectAll" class="select-ui">Select All</button>
         <button @click="deSelectAll" class="select-ui">Deselect All</button>
         <button @click="deleteHighlightedEntries" class="delete-ui">Delete Selected</button>
-        <button @click="doneSelected" class="done-ui">Done Selected</button>
         <button @click="notDoneSelected" class="done-ui">Not Done Selected</button>
+        <button @click="doneSelected" class="done-ui">Done Selected</button>
         <button class="totalTime">Total Est. Time: {{ totalTime }} hrs</button>
     </div>
 </template>

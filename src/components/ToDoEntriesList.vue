@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ToDoEntry v-for="(entry, index) in entriesList"
+		<ToDoEntry v-for="(entry, index) in list"
 			:details="entry.details"
 			:created="entry.created"
 			:key="entry.id"
@@ -23,60 +23,58 @@
 	import {ref, defineComponent} from 'vue'
 	export default defineComponent({
 		props: {
-			entriesList: Array<LooseToDoEntry>,
+			list: Array<LooseToDoEntry>,
 		},
 		emits: ['timeEdit'],
 		components: {
 			ToDoEntry
 		},
 		setup(props, {emit}) {
-			const newEntryId = ref(0)
-			const currentEntryCharacters = ref(0)
 			const dehighlighting = ref(true)
 
 			let deleteEntry = (index: number) => {
-				if(props.entriesList)
-					props.entriesList.splice(index, 1)
+				if(props.list)
+					props.list.splice(index, 1)
 			}
 			let editEntry = (index: number, message: string) => {
-				if(props.entriesList)
-					props.entriesList[index].details = message;
+				if(props.list)
+					props.list[index].details = message;
 			}
 			let highlightEntries = (index: number) => {
-				if(props.entriesList && mouseDown) {
-					if(props.entriesList[index].highlighted && dehighlighting.value)
-						props.entriesList[index].highlighted = false;
-					else if(!props.entriesList[index].highlighted && !dehighlighting.value)
-						props.entriesList[index].highlighted = true;
+				if(props.list && mouseDown) {
+					if(props.list[index].highlighted && dehighlighting.value)
+						props.list[index].highlighted = false;
+					else if(!props.list[index].highlighted && !dehighlighting.value)
+						props.list[index].highlighted = true;
 				}
 			}
 			let highlightEntry = (index: number) => {
-				if(props.entriesList)
-					if(props.entriesList[index].highlighted) {
-						props.entriesList[index].highlighted = false;
+				if(props.list)
+					if(props.list[index].highlighted) {
+						props.list[index].highlighted = false;
 						dehighlighting.value = true;
 					}
 					else {
-						props.entriesList[index].highlighted = true;
+						props.list[index].highlighted = true;
 						dehighlighting.value = false;
 					}
 			}
 			let doneEntry = (index: number) => {
-				if(props.entriesList)
-					if(props.entriesList[index].done) {
-						props.entriesList[index].done = false;
+				if(props.list)
+					if(props.list[index].done) {
+						props.list[index].done = false;
 					}
 					else {
-						props.entriesList[index].done = true;
+						props.list[index].done = true;
 					}
 					emit('timeEdit')
 			}
 			let timeChange = (index: number, time: string) => {
-				if(props.entriesList) {
+				if(props.list) {
 					if(!(time == '')) {
-						props.entriesList[index].estTime = parseInt(time)
+						props.list[index].estTime = parseInt(time)
 					} else {
-						props.entriesList[index].estTime = 0
+						props.list[index].estTime = 0
 					}
 					emit('timeEdit')
 				}
@@ -106,8 +104,6 @@
 				highlightEntry,
 				doneEntry,
 				timeChange,
-				newEntryId,
-				currentEntryCharacters,
 				mouseDown
 			}
 		},
