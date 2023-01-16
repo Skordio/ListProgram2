@@ -1,20 +1,21 @@
 <template>
-    <!-- Top Bar, fixed to top of screen -->
-    <!-- WIP, will get rid of styling -->
     <div class="header-bar-container">
         <ToDoEntryBox :entriesList="list" />
     </div>
     
-    <!-- List, -->
     <div class="entry-list-container">
-        <ToDoEntriesList :entriesList="list"/>
+        <ToDoEntriesList 
+        :entriesList="list"
+        @time-edit="timeCalc"/>
     </div>
-    <div class="ui-container">
-        <button @click="selectAll">Select All</button>
-        <button @click="deSelectAll">Deselect All</button>
-        <button @click="deleteHighlightedEntries">Delete Selected</button>
-        <button class=".totalTimeButton">Total Est. Time: {{ totalTime }}</button>
 
+    <div class="ui-container">
+        <button @click="selectAll" class="select-ui">Select All</button>
+        <button @click="deSelectAll" class="select-ui">Deselect All</button>
+        <button @click="deleteHighlightedEntries" class="delete-ui">Delete Selected</button>
+        <button @click="doneSelected" class="done-ui">Done Selected</button>
+        <button @click="notDoneSelected" class="done-ui">Not Done Selected</button>
+        <button class="totalTimeButton">Total Est. Time: {{ totalTime }} hrs</button>
     </div>
 </template>
 
@@ -22,7 +23,7 @@
     import ToDoEntriesList from './ToDoEntriesList.vue'
     import ToDoEntryBox from './ToDoEntryBox.vue';
     import {LooseToDoEntry} from './types'
-    import { onMounted, ref, reactive, defineComponent } from 'vue'
+    import { onBeforeMount, ref, defineComponent } from 'vue'
     export default defineComponent({
         props: {
             list: Array<LooseToDoEntry>
@@ -40,6 +41,7 @@
                         if(props.list[i].highlighted)
                             props.list.splice(i, 1)
                     }
+                timeCalc()
             }
             let selectAll = () => {
                 if(props.list) {
@@ -57,23 +59,54 @@
                     }
                 }
             }
+            let doneSelected = () => {
+                if(props.list) {
+                    for(var i = 0; i < props.list.length; i++) {
+                        if(props.list[i].highlighted)
+                            props.list[i].done= true;
+                    }
+                    timeCalc()
+                }
+            }
+            let notDoneSelected = () => {
+                if(props.list) {
+                    for(var i = 0; i < props.list.length; i++) {
+                        if(props.list[i].highlighted)
+                            props.list[i].done= false;
+                    }
+                    timeCalc()
+                }
+            }
 			let fixEntries = () => {
 				if(props.list)
 					for(var i = 0; i < props.list.length; i++) {
-                        props.list[i].id = i
+                        props.list[i].id = i;
                         props.list[i].highlighted = false;
-						if(!('created' in props.list[i])) {
-							props.list[i].created = new Date()
-						}
+                        props.list[i].done = false;
+                        props.list[i].estTime = 0;
+						props.list[i].created = new Date();
 					}
 			}
-            onMounted(() => {
+            let timeCalc = () => {
+                if(props.list) {
+                    var sum = 0;
+					for(var i = 0; i < props.list.length; i++) {
+                        if(!(props.list[i].done!))
+                            sum = +sum + +props.list[i].estTime! ;
+					}
+                    totalTime.value = parseInt('' + sum)
+                }
+            }
+            onBeforeMount(() => {
 				fixEntries();
 			})
             return {
                 deleteHighlightedEntries,
                 selectAll,
                 deSelectAll,
+                doneSelected,
+                notDoneSelected,
+                timeCalc,
                 totalTime
             }
         }
@@ -101,8 +134,8 @@
     flex-flow: column;
 
     top: 3.5em;
-    left: 1em;
-    right: 5em;
+    left: 0.6em;
+    right: 4.3em;
     position: absolute;
 }
 
@@ -111,7 +144,7 @@
     flex-flow: column;
     position: fixed;
     top: 7.3em;
-    right: 2em;
+    right: 1.5em;
     width: 6em;
     padding: .5em;
     gap: 10px;
@@ -119,19 +152,17 @@
     background-color: rgb(29, 104, 168);
     border-radius: 1em;
 }
-
-.noselect {
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently
-                            supported by Chrome, Edge, Opera and Firefox */
-}
-/* this is not working, I am not sure why */
-.totalTimeButton, .totalTimeButton:hover {
-  cursor: default;
-  border-color: #646cff00;
-}
+    .select-ui {
+        background-color: rgb(64, 39, 104);
+    }
+    .delete-ui {
+        background-color: #570808;
+    }
+    .done-ui {
+        background-color: #063b0a;
+    }
+    .totalTimeButton, .totalTimeButton:hover {
+        cursor: default;
+        border: 0px;
+    }
 </style>

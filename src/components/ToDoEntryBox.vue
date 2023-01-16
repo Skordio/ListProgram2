@@ -39,14 +39,13 @@
 		},
 		setup(props, {emit}) {
 			const newDetails = ref('')
-			const todoEntries = ref(props.entriesList)
 			
 			let makeNewEntry = (message: string, created: Date) => {
-				if(todoEntries.value)
-					if(todoEntries.value.length == 0)
-						todoEntries.value.push({details: message, created: created, id: 0})
+				if(props.entriesList)
+					if(props.entriesList.length == 0)
+						props.entriesList.push({details: message, created: created, id: 0, highlighted: false, done: false, estTime: 0 })
 					else
-						todoEntries.value.push({details: message, created: created, id: todoEntries.value[todoEntries.value.length-1].id! + 1})
+						props.entriesList.push({details: message, created: created, id: props.entriesList[props.entriesList.length-1].id! + 1, highlighted: false, done: false, estTime: 0 })
 			}
 			return {
 				makeNewEntry,

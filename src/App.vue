@@ -1,6 +1,5 @@
 
 <template>
-    <!-- List, -->
     <div class="entry-list-container">
         <ToDoList :list="newList"/>
     </div>
@@ -13,14 +12,11 @@
         components: {
             ToDoList
         },
-        setup(props) {
+        setup() {
             const newList = ref([
-                {   details: "Improve new todo list app", 
-                    created: new Date(), id:  1},
-                {   details: "Make Coffee", 
-                    created: new Date(), id: 2},
-                {   details: "This list is passed in with props",
-                    created: new Date()}])
+                {   details: "Improve new todo list app"},
+                {   details: "Make Coffee"},
+                {   details: "This list is passed in with props"}])
             return {
                 newList
             }
@@ -38,16 +34,6 @@
     left: 1em;
     right: 1em;
     position: absolute;
-}
-
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
 
