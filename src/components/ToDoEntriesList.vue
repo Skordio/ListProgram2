@@ -31,23 +31,20 @@
 		},
 		setup(props, {emit}) {
 			const dehighlighting = ref(true)
-
+		
 			let deleteEntry = (index: number) => {
 				if(props.list)
 					props.list.splice(index, 1)
 			}
+			
 			let editEntry = (index: number, message: string) => {
 				if(props.list)
 					props.list[index].details = message;
 			}
-			let highlightEntries = (index: number) => {
-				if(props.list && mouseDown) {
-					if(props.list[index].highlighted && dehighlighting.value)
-						props.list[index].highlighted = false;
-					else if(!props.list[index].highlighted && !dehighlighting.value)
-						props.list[index].highlighted = true;
-				}
-			}
+			//Changes the highlight state of an entry between true and false, this method is only called
+			//for the first select of a multiple-entry select, which is why it sets dehighlighting to either true
+			//or false, depending on whether the user is dehighlighting entries or highlighting them. This makes it
+			//so one drag of the mouse can only be used to either highlight or dehighlight entries, not both
 			let highlightEntry = (index: number) => {
 				if(props.list)
 					if(props.list[index].highlighted) {
@@ -59,6 +56,17 @@
 						dehighlighting.value = false;
 					}
 			}
+			//The second highlight method, this method will highlight any entries that the mouse is dragged over
+			//after the inital one is highlighted by the previous method
+			let highlightEntries = (index: number) => {
+				if(props.list && mouseDown) {
+					if(props.list[index].highlighted && dehighlighting.value)
+						props.list[index].highlighted = false;
+					else if(!props.list[index].highlighted && !dehighlighting.value)
+						props.list[index].highlighted = true;
+				}
+			}
+			//Changes the done state of an entry between true and false
 			let doneEntry = (index: number) => {
 				if(props.list)
 					if(props.list[index].done) {
@@ -69,6 +77,7 @@
 					}
 					emit('timeEdit')
 			}
+			//Changes time for a specific entry
 			let timeChange = (index: number, time: string) => {
 				if(props.list) {
 					if(!(time == '')) {
@@ -80,6 +89,7 @@
 				}
 			}
 
+			//Used by the highlight functions
 			var mouseDown = 0;
 			document.body.onmousedown = function() { 
 				if(mouseDown == 0)
@@ -103,8 +113,7 @@
 				highlightEntries,
 				highlightEntry,
 				doneEntry,
-				timeChange,
-				mouseDown
+				timeChange
 			}
 		},
 		
