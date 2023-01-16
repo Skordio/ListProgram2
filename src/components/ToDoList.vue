@@ -13,6 +13,7 @@
         <button @click="selectAll">Select All</button>
         <button @click="deSelectAll">Deselect All</button>
         <button @click="deleteHighlightedEntries">Delete Selected</button>
+        <button class=".totalTimeButton">Total Est. Time: {{ totalTime }}</button>
 
     </div>
 </template>
@@ -31,7 +32,8 @@
             ToDoEntryBox
         },
         setup(props) {
-            //this does not work yet, the idea was to fix entries that don't come in with a good id or date
+            const totalTime = ref(0)
+
             let deleteHighlightedEntries = () => {
 				if(props.list)
 					for (var i = props.list.length-1; i >= 0; i--) {
@@ -71,7 +73,8 @@
             return {
                 deleteHighlightedEntries,
                 selectAll,
-                deSelectAll
+                deSelectAll,
+                totalTime
             }
         }
     })
@@ -115,5 +118,20 @@
 
     background-color: rgb(29, 104, 168);
     border-radius: 1em;
+}
+
+.noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                            supported by Chrome, Edge, Opera and Firefox */
+}
+/* this is not working, I am not sure why */
+.totalTimeButton, .totalTimeButton:hover {
+  cursor: default;
+  border-color: #646cff00;
 }
 </style>
