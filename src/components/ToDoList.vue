@@ -131,7 +131,7 @@
     display: flex;
     flex-flow: column;
 
-    top: 7em;
+    top: 6em;
     left: 1.2em;
     right: 8.5em;
     position: absolute;
@@ -141,7 +141,7 @@
     display: flex;
     flex-flow: column;
     position: fixed;
-    top: 7.3em;
+    top: 6.3em;
     right: 1.5em;
     width: 6em;
     padding: .5em;

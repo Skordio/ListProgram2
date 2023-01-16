@@ -14,11 +14,14 @@
 			</div>
 		</div>
 
-		<input  v-model="newDetails" placeholder="new note" 
+		<input v-model="newDetails" placeholder="new note" 
 			@keydown.enter="makeNewEntry(newDetails)" 
-			class="input-box" />
+			class="input-box"
+			id="main-input-field" />
 
-		<Button @click="makeNewEntry(newDetails)" class="add-button">
+		<Button @click="makeNewEntry(newDetails)" 
+				class="add-button"
+				id="add-entry-button">
 			Add Note
 		</Button>
 	</div>
