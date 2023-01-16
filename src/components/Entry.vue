@@ -5,11 +5,9 @@
             :class="[{'entry-container-highlighted': highlighted},{'entry-container-done': done}]" >
             <div class="details-container">
                 <div>
-                    <!-- Input for edits -->
                     <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
                 </div>
                 <div @mouseenter="$emit('highlight')" @mousedown="$emit('highlightMe')">
-                    <!-- Note details -->
                     <p  v-show="editingPreview == false" class="noselect"> {{ details }} </p>
                 </div>
             </div>
@@ -88,184 +86,166 @@ export default defineComponent({
 
 
 <style>
-    .noselect {
-        -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-                -ms-user-select: none; /* Internet Explorer/Edge */
-                    user-select: none; /* Non-prefixed version, currently
-                                        supported by Chrome, Edge, Opera and Firefox */
-    }
     .entry-container{
         display: flex;
         flex-flow: row nowrap;
         margin: 5px;
         overflow: hidden;
         align-items: center;
-        
         flex: 1 0;
         
         background-color: #825fb9;
-		border-radius: 2em;
+		border-radius: 1.5em;
     }
-    .entry-container-highlighted{
-        background-color: #3f1780;
-		border-radius: 1em;
-    }
-    .entry-container-done{
-        border: 3px solid green;
-    }
+        .entry-container-highlighted{
+            background-color: #3f1780;
+            border-radius: 1em;
+        }
+        .entry-container-done{
+            border: 3px solid green;
+        }
 
     .details-container{
         flex: 2 1;
-        margin-top: -1%;
-        margin-bottom: -1%;
+
+        margin-top: -1em;
+        margin-bottom: -1em;
         margin-left: 0%;
-        /* background-color: rgb(166, 165, 167); */
     }
+        .details-container > div {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
 
-    /* applied to both text and input */
-    .details-container > div {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-start;
-        margin-left: 1%;
-        
-        /* background-color: rgb(13, 10, 15); */
-    }
+            margin-left: 1%;
+        }
+        .details-container > div > p {
+            flex: 1 1;
 
-    .details-container > div > p {
-        flex: 1 1;
-        word-wrap: break-word;
-        font-size: 140%;
-        text-align: left;
-        padding: .8em;
-        margin: 0.2em;
-        margin-left: -.8em;
-        
-        /* background-color: rgb(87, 0, 173); */
-    }
+            font-size: 140%;
+            word-wrap: break-word;
+            text-align: left;
+            padding: .8em;
+            margin: 0.2em;
+            margin-left: -.8em;
+        }
+        .details-container > div > textarea {
+            flex: 1 2;
+            justify-self: stretch;
 
-    .details-container > div > textarea {
-        flex: 1 2;
-
-        justify-self: stretch;
-        font-size: 140%;
-        text-align: left;
-        margin: 1%;
-        
-        margin-left: 1px;
-        
-        
-        /* background-color: rgb(87, 0, 173); */
-    }
-
+            font-size: 140%;
+            text-align: left;
+            margin: 1%;
+            margin-left: 1px;
+        }
     .button-date-container {
         display: flex;
         align-self: flex-start;
         align-content: center;
+
         margin-right: 1em;
-        /* background-color: rgb(86, 177, 63); */
+        margin-top: -0.2em;
+        margin-bottom: -.2em;
         max-width: 20em;
     }
-    .button{
-        flex: 0 0;
-        align-self: center;
-        margin: 1%;
-        max-height: 2.4em;
-        /* background-color: rgb(152, 177, 63); */
-    }
-    .date{
-        flex: 1 1;
-        /* background-color: rgb(111, 114, 102); */
-        margin-top: 1%;
-        margin-bottom: 1%;
-        margin-right: 2%;
-        min-width: 6em;
-        text-align: right;
-    }
-    .delete{
-        max-width: 1em;
-    }
-    .edit{
-        max-width: 3em;
-    }
-    .edit-text {
-        margin: 0em;
-        margin-left: -0.6em;
-    }
-    .icon{
-        margin-left: -.6em;
-    }
-    .done {
-        max-width: 1em;
-    }
-    .two-buttons-container {
-        display: flex;
-        justify-content: center;
-    }
-    .est-time{
-        text-align: center;
-        max-height: 2.4em;
-        min-height: 2.4em;
-        border-radius: 1em;
-        max-width: 4em;
-        margin-top: 0.6em;
-        margin-left: 0.1em;
-        margin-right: -.5em;
-    }
-
-    @media (max-width: 1000px) {
-        .details-container > div > p {
-            word-wrap: break-word;
-            font-size: 100%;
-            margin-left: 0em;
-        }
-        .details-container > div > textarea {
-            font-size: 100%;
-        }
-        
-        .button-date-container {
-            display: flex;
-            flex-flow: column;
-            align-content: center;
-            align-self: flex-start;
+        .button{
             flex: 0 0;
-            margin-right: 0em;
+            align-self: center;
+
+            margin: 1%;
+            max-height: 2.4em;
         }
         .date{
-            flex: 0 0;
-            min-width: 12em;
-            text-align: center;
+            flex: 1 1;
 
+            margin-top: 1%;
+            margin-bottom: 1%;
+            margin-right: 2%;
+            min-width: 6em;
+            text-align: right;
         }
         .delete{
             max-width: 1em;
         }
         .edit{
             max-width: 3em;
-            text-align: center;
         }
         .edit-text {
             margin: 0em;
             margin-left: -0.6em;
         }
-        .button{
-            flex: 1 1;
-            height: 1.5em;
-            padding-top: 1%;
-        }
-        .delete-icon{
+        .icon{
             margin-left: -.6em;
         }
-        .est-time{
-            min-height: 1.4em;
-            border-radius: 1em;
-            max-width: 3em;
-            margin-right: 0.6em;
-            margin-top: -0.1em;
+        .done {
+            max-width: 1em;
         }
+        .two-buttons-container {
+            display: flex;
+            justify-content: center;
+        }
+        .est-time{
+            text-align: center;
+            max-height: 2.4em;
+            min-height: 2.4em;
+            border-radius: 1em;
+            max-width: 4em;
+            margin-top: 0.6em;
+            margin-left: 0.1em;
+            margin-right: -.5em;
+        }
+
+    @media (max-width: 1000px) {
+        .details-container > div > p {
+            word-wrap: break-word;
+            font-size: 100%;
+            margin-left: -0.5em;
+        }
+        .details-container > div > textarea {
+            font-size: 100%;
+        }
+        .button-date-container {
+            display: flex;
+            flex-flow: column;
+            align-content: center;
+            align-self: flex-start;
+            flex: 0 0;
+            
+            margin-right: 0em;
+            margin-bottom: 0em;
+        }
+            .date{
+                flex: 0 0;
+                min-width: 12em;
+                text-align: center;
+
+            }
+            .delete{
+                max-width: 1em;
+            }
+            .edit{
+                max-width: 3em;
+                text-align: center;
+            }
+            .edit-text {
+                margin: 0em;
+                margin-left: -0.6em;
+            }
+            .button{
+                flex: 1 1;
+                height: 1.5em;
+                padding-top: 1%;
+            }
+            .delete-icon{
+                margin-left: -.6em;
+            }
+            .est-time{
+                min-height: 1.4em;
+                border-radius: 1em;
+                max-width: 3em;
+                margin-right: 0.6em;
+                margin-top: -0.1em;
+            }
     }
 
 

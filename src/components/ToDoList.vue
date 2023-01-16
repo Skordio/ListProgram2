@@ -1,6 +1,6 @@
 <template>
     <div class="header-bar-container">
-        <ToDoEntryBox :entriesList="list" />
+        <ToDoEntryBox :list="list" />
     </div>
     
     <div class="entry-list-container">
@@ -15,7 +15,7 @@
         <button @click="deleteHighlightedEntries" class="delete-ui">Delete Selected</button>
         <button @click="doneSelected" class="done-ui">Done Selected</button>
         <button @click="notDoneSelected" class="done-ui">Not Done Selected</button>
-        <button class="totalTimeButton">Total Est. Time: {{ totalTime }} hrs</button>
+        <button class="totalTime">Total Est. Time: {{ totalTime }} hrs</button>
     </div>
 </template>
 
@@ -36,12 +36,13 @@
             const totalTime = ref(0)
 
             let deleteHighlightedEntries = () => {
-				if(props.list)
+				if(props.list) {
 					for (var i = props.list.length-1; i >= 0; i--) {
                         if(props.list[i].highlighted)
                             props.list.splice(i, 1)
                     }
-                timeCalc()
+                    timeCalc()
+                }
             }
             let selectAll = () => {
                 if(props.list) {
@@ -65,7 +66,8 @@
                         if(props.list[i].highlighted)
                             props.list[i].done= true;
                     }
-                    timeCalc()
+                    timeCalc();
+                    deSelectAll();
                 }
             }
             let notDoneSelected = () => {
@@ -75,16 +77,17 @@
                             props.list[i].done= false;
                     }
                     timeCalc()
+                    deSelectAll();
                 }
             }
 			let fixEntries = () => {
 				if(props.list)
 					for(var i = 0; i < props.list.length; i++) {
+						props.list[i].created = new Date();
                         props.list[i].id = i;
                         props.list[i].highlighted = false;
                         props.list[i].done = false;
                         props.list[i].estTime = 0;
-						props.list[i].created = new Date();
 					}
 			}
             let timeCalc = () => {
@@ -113,14 +116,9 @@
     })
 </script>
 
-<style>
+<style scoped>
 /* this flexbox is for positioning at top of screen */
 .header-bar-container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    overflow: hidden;
-
     top: 1.5em;
     left: 1.5em;
     right: 1.5em;
@@ -133,9 +131,9 @@
     display: flex;
     flex-flow: column;
 
-    top: 3.5em;
-    left: 0.6em;
-    right: 4.3em;
+    top: 7em;
+    left: 1.2em;
+    right: 8.5em;
     position: absolute;
 }
 
@@ -147,7 +145,7 @@
     right: 1.5em;
     width: 6em;
     padding: .5em;
-    gap: 10px;
+    gap: 5px;
 
     background-color: rgb(29, 104, 168);
     border-radius: 1em;
@@ -161,7 +159,7 @@
     .done-ui {
         background-color: #063b0a;
     }
-    .totalTimeButton, .totalTimeButton:hover {
+    .totalTime, .totalTime:hover {
         cursor: default;
         border: 0px;
     }

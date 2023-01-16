@@ -1,6 +1,6 @@
 
 <template>
-    <div class="entry-list-container">
+    <div>
         <ToDoList :list="newList"/>
     </div>
 </template>
@@ -23,18 +23,3 @@
         }
     })
 </script>
-
-<style>
-.todo-list-container {
-    background-color: #929194;
-    display: flex;
-    flex-flow: column;
-
-    top: 1em;
-    left: 1em;
-    right: 1em;
-    position: absolute;
-}
-</style>
-
-
