@@ -14,24 +14,22 @@
             ToDoList
         },
         props: {
-            list: Array<string>
+            list: Array<LooseToDoEntry>
         },
         setup(props) {
-            let convertToEntries = (earlyList: Array<string>) => {
-                var newArray = new Array<LooseToDoEntry>();
-                for(var i = 0; i < earlyList.length; i++) {
-                    if(earlyList[i] != "")
-                        newArray.push({details: earlyList[i]})
-                }
-                return newArray;
-            }
-            if(props.list)
-                var newList = props.list;
-            else
-                var newList = [""];
+            // let convertToEntries = (earlyList: Array<string>) => {
+            //     var newArray = new Array<LooseToDoEntry>();
+            //     for(var i = 0; i < earlyList.length; i++) {
+            //         if(earlyList[i] != "")
+            //             newArray.push({details: earlyList[i]})
+            //     }
+            //     return newArray;
+            // }
+            var newList:Array<LooseToDoEntry> = [];
+            if(!(props.list == undefined))
+                newList = props.list;
 
-
-            const entriesList = ref(convertToEntries(newList))
+            const entriesList = ref(newList)
             return {
                 entriesList
             }

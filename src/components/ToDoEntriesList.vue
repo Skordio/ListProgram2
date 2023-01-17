@@ -13,6 +13,7 @@
 			@highlight-me="highlightEntry(index)"
 			@done="doneEntry(index)"
 			@time-edit="(time) => {timeChange(index, time)}"
+			data-test="individual-entry"
 		/>
 	</div>
 </template>

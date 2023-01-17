@@ -10,7 +10,7 @@
     </div>
 
     <div class="ui-container">
-        <button @click="selectAll" class="select-ui">Select All</button>
+        <button @click="selectAll" class="select-ui" data-test="select-all-button">Select All</button>
         <button @click="deSelectAll" class="select-ui">Deselect All</button>
         <button @click="deleteHighlightedEntries" class="delete-ui">Delete Selected</button>
         <button @click="notDoneSelected" class="done-ui">Not Done Selected</button>
