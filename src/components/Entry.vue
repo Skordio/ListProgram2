@@ -41,7 +41,7 @@
 
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { onBeforeMount, ref, defineComponent } from 'vue'
 export default defineComponent({
     emits: ['edit','delete','highlight','highlightMe','done','timeEdit'],
     props: {

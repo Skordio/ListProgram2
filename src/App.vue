@@ -1,24 +1,39 @@
 
 <template>
     <div>
-        <ToDoList :list="newList"/>
+        <ToDoList :list="entriesList"/>
     </div>
 </template>
 
 <script lang="ts">
     import ToDoList from './components/ToDoList.vue'
+    import {LooseToDoEntry} from './components/types'
     import { ref, defineComponent } from 'vue'
     export default defineComponent({
         components: {
             ToDoList
         },
-        setup() {
-            const newList = ref([
-                {   details: "Improve new todo list app"},
-                {   details: "Make Coffee"},
-                {   details: "This list is passed in with props"}])
+        props: {
+            list: Array<string>
+        },
+        setup(props) {
+            let convertToEntries = (earlyList: Array<string>) => {
+                var newArray = new Array<LooseToDoEntry>();
+                for(var i = 0; i < earlyList.length; i++) {
+                    if(earlyList[i] != "")
+                        newArray.push({details: earlyList[i]})
+                }
+                return newArray;
+            }
+            if(props.list)
+                var newList = props.list;
+            else
+                var newList = [""];
+
+
+            const entriesList = ref(convertToEntries(newList))
             return {
-                newList
+                entriesList
             }
         }
     })

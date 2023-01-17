@@ -3,23 +3,20 @@ import { expect, test } from 'vitest'// @ts-ignore
 import ToDoList from '../src/components/ToDoList.vue'// @ts-ignore
 import ToDoEntry from '../src/components/Entry.vue'// @ts-ignore
 import ToDoEntriesList from '../src/components/ToDoEntriesList.vue'// @ts-ignore
-import ToDoEntryBox from '../src/components/ToDoEntryBox.vue';
+import ToDoEntryBox from '../src/components/ToDoEntryBox.vue';// @ts-ignore
+import App from '../src/App.vue'
 
 test('test test', () => {
     expect(Math.sqrt(4)).toBe(2)
 })
 
-test('makes New Entry1', async () => {
-    
-    const wrapper = mount(ToDoList, {props: {  }});
+test('makes one entry and tests if it looks right', async () => {
+    const wrapper = mount(App, {props: { }});
 
     var newMessage = "hello";
-
-    await (await wrapper.get('input[data-test="main-input-field"]')).setValue(newMessage);
-    await (await wrapper.get('button[data-test="add-entry-button"]')).trigger("click");
-
-            
-    expect(await wrapper.get('[data-test="entry-text"]')).toMatch(newMessage);
+    await wrapper.get('input[data-test="main-input-field"]').setValue(newMessage);
+    await wrapper.get('button[data-test="add-entry-button"]').trigger("click");
+    expect(wrapper.get('[data-test="entry-text"]').text()).toMatch(newMessage);
 });
 
 // test('makes New Entry2', async () => {
