@@ -1,0 +1,17 @@
+Progress: resolved 0, reused 1, downloaded 0, added 0
+ WARN  deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+Packages: +2 -2
+++--
+Progress: resolved 118, reused 96, downloaded 0, added 2, done
+
+dependencies:
++ @types/node 18.11.18
+
+ WARN  Issues with peer dependencies found
+.
+└─┬ ts-jest 29.0.5
+  └── ✕ missing peer jest@^29.0.0
+Peer dependencies that should be installed:
+  jest@^29.0.0
+
+Done in 1.4s
