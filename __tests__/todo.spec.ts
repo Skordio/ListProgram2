@@ -18,20 +18,19 @@ test('makes New Entry1', async () => {
     await wrapper.get('[data-test="add-entry-button"]').trigger("click");
 
             
-    expect(wrapper.get('[data-test="entry-text"]')).toMatch(newMessage);
+    expect(await wrapper.get('[data-test="entry-text"]')).toMatch(newMessage);
 });
 
-test('makes New Entry1', async () => {
+test('makes New Entry2', async () => {
     
     const wrapper = mount(ToDoList, {props: { ["new todo entry"]:Array }});
 
     var newMessage = "hello";
 
-    await wrapper.get('[data-test="main-input-field"]').setValue(newMessage);
-    await wrapper.get('[data-test="add-entry-button"]').trigger("click");
+    await wrapper.getComponent(ToDoEntryBox).vm.makeNewEntry(newMessage);
 
             
-    expect(wrapper.get('[data-test="entry-text"]')).toMatch(newMessage);
+    expect(await wrapper.get('[data-test="entry-text"]')).toMatch(newMessage);
 });
 // test('makes a New Entry2', () => {
     
