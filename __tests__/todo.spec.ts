@@ -223,6 +223,21 @@ describe('entry interaction tests', async () => {
         expect(wrapper.getComponent(ToDoEntriesList).emitted()).toHaveProperty('timeEdit');
     })
 
+    test('testing done entry then undoing the same entry', async () => {
+        var testStartVals = await passIn3Entries();
+        const wrapper = testStartVals[0];
+        var entryArray = testStartVals[1];
+
+        //@ts-ignore
+        await wrapper.get('[class="done button"]').trigger('click');
+        //@ts-ignore
+        await wrapper.get('[class="done button"]').trigger('click');
+
+        expect(entryArray[0].props('done')).toBe(false);
+        //@ts-ignore
+        expect(wrapper.getComponent(ToDoEntriesList).emitted()).toHaveProperty('timeEdit');
+    })
+
     test('testing total time update with only one entry', async () => {
         var testStartVals = await passIn3Entries();
         const wrapper = testStartVals[0];
@@ -246,11 +261,13 @@ describe('entry interaction tests', async () => {
         await entryArray[1].get('[class="est-time"]').trigger('keyup');
         await entryArray[2].get('[class="est-time"]').setValue('5');
         await entryArray[2].get('[class="est-time"]').trigger('keyup');
+        await entryArray[1].get('[class="est-time"]').setValue('');
+        await entryArray[1].get('[class="est-time"]').trigger('keyup');
 
         //@ts-ignore
         expect(wrapper.getComponent(ToDoEntriesList).emitted()).toHaveProperty('timeEdit');
         //@ts-ignore
-        expect(wrapper.get('[data-test="total-time"]').text()).toContain('8');
+        expect(wrapper.get('[data-test="total-time"]').text()).toContain('6');
     })
 
     test('testing done entry in tandem with total time update', async () => {
@@ -280,11 +297,37 @@ describe('entry interaction tests', async () => {
         var entryArray = testStartVals[1]
         
         await entryArray[0].get('[data-test="entry-click-div"]').trigger('mousedown');
+        await entryArray[0].get('[data-test="entry-click-div"]').trigger('mouseup');
         await entryArray[1].get('[data-test="entry-click-div"]').trigger('mousedown');
+        await entryArray[1].get('[data-test="entry-click-div"]').trigger('mouseup');
         await entryArray[2].get('[data-test="entry-click-div"]').trigger('mousedown');
+        await entryArray[2].get('[data-test="entry-click-div"]').trigger('mouseup');
 
         expect(entryArray[0].props('highlighted')).toBe(true)
         expect(entryArray[1].props('highlighted')).toBe(true)
         expect(entryArray[2].props('highlighted')).toBe(true)
     });
+
+    // this test sadgely won't work :(
+    // test('passes in 3 entries and highlights them one by one', async () => {
+    //     var testStartVals = await passIn3Entries();
+    //     const wrapper = testStartVals[0]
+    //     var entryArray = testStartVals[1]
+        
+    //     await entryArray[0].get('[data-test="entry-click-div"]').trigger('mouseenter');
+    //     //@ts-ignore
+    //     wrapper.get('div').trigger('mousedown');
+    //     await entryArray[0].get('[data-test="entry-click-div"]').trigger('mousedown');
+    //     await entryArray[0].get('[data-test="entry-click-div"]').trigger('mouseleave');
+    //     await entryArray[1].get('[data-test="entry-click-div"]').trigger('mouseenter');
+    //     await entryArray[1].get('[data-test="entry-click-div"]').trigger('mouseleave');
+    //     await entryArray[2].get('[data-test="entry-click-div"]').trigger('mouseenter');
+    //     await entryArray[2].get('[data-test="entry-click-div"]').trigger('mouseup');
+    //     //@ts-ignore
+    //     wrapper.trigger('mouseup');
+
+    //     expect(entryArray[0].props('highlighted')).toBe(true) 
+    //     expect(entryArray[1].props('highlighted')).toBe(true)
+    //     expect(entryArray[2].props('highlighted')).toBe(true)
+    // });
 })
