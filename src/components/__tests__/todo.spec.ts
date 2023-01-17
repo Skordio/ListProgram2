@@ -1,9 +1,6 @@
 import {mount} from '@vue/test-utils'
 import 'jest';
 import ToDoList from '../ToDoList.vue'
-import ToDoEntry from '../Entry.vue'
-import ToDoEntriesList from '../ToDoEntriesList.vue'
-import ToDoEntryBox from '../ToDoEntryBox.vue';
 
 test('makes New Entry1', async () => {
     
