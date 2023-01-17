@@ -9,8 +9,5 @@ var newEntryList:Array<LooseToDoEntry> = [
     {   details: "Make Coffee"},
     {   details: "This list is passed in with props"}];
 
-createApp(App).mount('#app', {
-    props: {
-        list: newEntryList
-    }
-})
+const app = createApp(App)
+app.mount('#app')

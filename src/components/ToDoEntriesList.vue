@@ -36,6 +36,7 @@
 			let deleteEntry = (index: number) => {
 				if(props.list)
 					props.list.splice(index, 1)
+				emit('timeEdit')
 			}
 			
 			let editEntry = (index: number, message: string) => {

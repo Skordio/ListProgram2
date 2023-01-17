@@ -11,11 +11,11 @@
 
     <div class="ui-container">
         <button @click="selectAll" class="select-ui" data-test="select-all-button">Select All</button>
-        <button @click="deSelectAll" class="select-ui">Deselect All</button>
-        <button @click="deleteHighlightedEntries" class="delete-ui">Delete Selected</button>
-        <button @click="notDoneSelected" class="done-ui">Not Done Selected</button>
-        <button @click="doneSelected" class="done-ui">Done Selected</button>
-        <button class="totalTime">Total Est. Time: {{ totalTime }} hrs</button>
+        <button @click="deSelectAll" class="select-ui" data-test="deselect-all-button">Deselect All</button>
+        <button @click="deleteHighlightedEntries" class="delete-ui" data-test="delete-selected-button">Delete Selected</button>
+        <button @click="notDoneSelected" class="done-ui" data-test="not-done-selected-button">Not Done Selected</button>
+        <button @click="doneSelected" class="done-ui" data-test="done-selected-button">Done Selected</button>
+        <button class="totalTime" data-test="total-time">Total Est. Time: {{ totalTime }} hrs</button>
     </div>
 </template>
 
