@@ -7,7 +7,7 @@ import ToDoEntryBox from '../ToDoEntryBox.vue';
 
 test('makes New Entry1', async () => {
     
-    const wrapper = mount(ToDoList, {props: { ["new todo entry"]:Array }});
+    const wrapper = mount(ToDoList, {props: {  }});
 
     var newMessage = "hello";
 
@@ -20,7 +20,7 @@ test('makes New Entry1', async () => {
 
 test('makes New Entry2', async () => {
     
-    const wrapper = mount(ToDoList, {props: { ["new todo entry"]:Array }});
+    const wrapper = mount(ToDoList, {props: {  }});
 
     var newMessage = "hello";
 
@@ -46,7 +46,7 @@ test('makes New Entry2', async () => {
 describe('ToDoList.vue', () => {
     it('makes New Entry3', async () => {
     
-            const wrapper = mount(ToDoList, {props: { ['']:Array }});
+            const wrapper = mount(ToDoList, {props: {  }});
         
             var newMessage = 'hello';
         
