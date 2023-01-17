@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<ToDoEntry v-for="(entry, index) in list" test="individual-entry"
+	<div data-test="entry-list"> 
+		<ToDoEntry v-for="(entry, index) in list" 
 			:details="entry.details"
 			:created="entry.created"
 			:key="entry.id"

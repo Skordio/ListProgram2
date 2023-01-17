@@ -1,6 +1,6 @@
 <template>
     
-    <div>
+    <div data-test="individual-element">
         <div class="entry-container" 
             :class="[{'entry-container-highlighted': highlighted},{'entry-container-done': done}]" >
             <div class="details-container">
@@ -8,7 +8,7 @@
                     <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
                 </div>
                 <div @mouseenter="$emit('highlight')" @mousedown="$emit('highlightMe')">
-                    <p  v-show="editingPreview == false" class="noselect" test="entry-text"> {{ details }} </p>
+                    <p  v-show="editingPreview == false" class="noselect" data-test="entry-text"> {{ details }} </p>
                 </div>
             </div>
 
