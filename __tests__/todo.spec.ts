@@ -15,9 +15,9 @@ import { VueElement } from 'vue'
 //helper function
 //passes in 3 entries into a new mounted app, then returns the wrapper and list of entry wrappers
 async function passIn3Entries() {
-    var newMessage0 = "hello"
-    var newMessage1 = "why not"
-    var newMessage2 = "oh shoot"
+    var newMessage0 = "hello";
+    var newMessage1 = "why not";
+    var newMessage2 = "oh shoot";
     var newEntryArray:Array<LooseToDoEntry> = [{details:newMessage0},{details:newMessage1},{details:newMessage2}];
     const wrapper = mount(App, {
         props: {
@@ -25,7 +25,7 @@ async function passIn3Entries() {
         }
     });
     var entryArray = await wrapper.findAllComponents('[data-test="individual-entry"]');
-    return [wrapper, entryArray]
+    return [wrapper, entryArray];
 }
 
 describe('entry creation', () => {
@@ -51,9 +51,9 @@ describe('entry creation', () => {
     });
 
     test('passes in an array of 3 Loose Entries with props and checks if it renders 3 entries', async () => {
-        var newMessage0 = "hello"
-        var newMessage1 = "why not"
-        var newMessage2 = "oh shoot"
+        var newMessage0 = "hello";
+        var newMessage1 = "why not";
+        var newMessage2 = "oh shoot";
         var newEntryArray:Array<LooseToDoEntry> = [{details:newMessage0},{details:newMessage1},{details:newMessage2}];
 
         const wrapper = mount(App, {
@@ -77,37 +77,37 @@ describe('general ui interaction tests', async () => {
 
     test('testing select all', async () => {
         var testStartVals = await passIn3Entries();
-        const wrapper = testStartVals[0]
-        var entryArray = testStartVals[1]
+        const wrapper = testStartVals[0];
+        var entryArray = testStartVals[1];
         
         //@ts-ignore
-        await wrapper.get('[data-test="select-all-button"]').trigger('click')
+        await wrapper.get('[data-test="select-all-button"]').trigger('click');
 
-        expect(entryArray[0].props('highlighted')).toBe(true)
-        expect(entryArray[1].props('highlighted')).toBe(true)
-        expect(entryArray[2].props('highlighted')).toBe(true)
+        expect(entryArray[0].props('highlighted')).toBe(true);
+        expect(entryArray[1].props('highlighted')).toBe(true);
+        expect(entryArray[2].props('highlighted')).toBe(true);
     });
 
     test('testing deselect all', async () => {
         var testStartVals = await passIn3Entries();
-        const wrapper = testStartVals[0]
-        var entryArray = testStartVals[1]
+        const wrapper = testStartVals[0];
+        var entryArray = testStartVals[1];
         
         //@ts-ignore
-        await wrapper.get('[data-test="select-all-button"]').trigger('click')
+        await wrapper.get('[data-test="select-all-button"]').trigger('click');
 
         //@ts-ignore
-        await wrapper.get('[data-test="deselect-all-button"]').trigger('click')
+        await wrapper.get('[data-test="deselect-all-button"]').trigger('click');
 
-        expect(entryArray[0].props('highlighted')).toBe(false)
-        expect(entryArray[1].props('highlighted')).toBe(false)
-        expect(entryArray[2].props('highlighted')).toBe(false)
+        expect(entryArray[0].props('highlighted')).toBe(false);
+        expect(entryArray[1].props('highlighted')).toBe(false);
+        expect(entryArray[2].props('highlighted')).toBe(false);
     });
 
     test('testing delete selected', async () => {
         var testStartVals = await passIn3Entries();
-        const wrapper = testStartVals[0]
-        var entryArray = testStartVals[1]
+        const wrapper = testStartVals[0];
+        var entryArray = testStartVals[1];
         
         //@ts-ignore
         await wrapper.get('[data-test="select-all-button"]').trigger('click')
@@ -309,14 +309,12 @@ describe('entry interaction tests', async () => {
     });
 
     // this test sadgely won't work :(
-    // test('passes in 3 entries and highlights them one by one', async () => {
+    // test('passes in 3 entries and highlights them by dragging the mouse', async () => {
     //     var testStartVals = await passIn3Entries();
     //     const wrapper = testStartVals[0]
     //     var entryArray = testStartVals[1]
         
     //     await entryArray[0].get('[data-test="entry-click-div"]').trigger('mouseenter');
-    //     //@ts-ignore
-    //     wrapper.get('div').trigger('mousedown');
     //     await entryArray[0].get('[data-test="entry-click-div"]').trigger('mousedown');
     //     await entryArray[0].get('[data-test="entry-click-div"]').trigger('mouseleave');
     //     await entryArray[1].get('[data-test="entry-click-div"]').trigger('mouseenter');
