@@ -10,12 +10,38 @@ import ToDoEntryBox from '../src/components/ToDoEntryBox.vue';
 
 test('makes New Entry', async () => {
     
-    const wrapper = mount(ToDoList)
+    const wrapper = mount(ToDoList, {props: { ['']:Array }});
 
-    var newMessage = 'hello'
+    var newMessage = 'hello';
 
-    await wrapper.get('#main-input-field').setValue(newMessage)
-    await wrapper.get('#add-entry-button').trigger('click')
+    await wrapper.find('input[test="main-input-field"]').setValue(newMessage);
+    await wrapper.find('button[test="add-entry-button"]').trigger('click');
 
-    expect(wrapper.findAll('#entry-text')).toBe(newMessage)
+    expect(wrapper.find('p[test="entry-text"]')).toBe(newMessage);
 });
+
+// test('makes a New Entry', async () => {
+    
+//     const wrapper = mount(ToDoList, {props: { ['']:Array }})
+
+//     var newMessage = 'hello'
+
+//     await wrapper.find('[test="main-input-field"]').setValue(newMessage)
+//     await wrapper.find('[test="add-entry-button"]').trigger('click')
+
+//     expect(wrapper.getComponent<typeof ToDoEntry>('ToDoEntry[test="individual-entry"]').vm.details).toBe(newMessage)
+// });
+
+describe('ToDoList.vue', () => {
+    it('makes New Entry', async () => {
+    
+            const wrapper = mount(ToDoList, {props: { ['']:Array }});
+        
+            var newMessage = 'hello';
+        
+            await wrapper.find('input[test="main-input-field"]').setValue(newMessage);
+            await wrapper.find('button[test="add-entry-button"]').trigger('click');
+        
+            expect(wrapper.find('p[test="entry-text"]')).toBe(newMessage);
+    })
+})

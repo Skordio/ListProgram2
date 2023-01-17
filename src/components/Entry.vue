@@ -8,7 +8,7 @@
                     <textarea rows="1" v-model="editedMessage" v-show="editingPreview == true" @keydown.enter="editThisEntry()" />
                 </div>
                 <div @mouseenter="$emit('highlight')" @mousedown="$emit('highlightMe')">
-                    <p  v-show="editingPreview == false" class="noselect" test="text" id="entry-text"> {{ details }} </p>
+                    <p  v-show="editingPreview == false" class="noselect" test="entry-text"> {{ details }} </p>
                 </div>
             </div>
 

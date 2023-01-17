@@ -17,13 +17,13 @@
 		<input v-model="newDetails" placeholder="new note" 
 			@keydown.enter="makeNewEntry(newDetails)" 
 			class="input-box"
-			id="main-input-field" />
+			test="main-input-field" />
 
-		<Button @click="makeNewEntry(newDetails)" 
+		<button @click="makeNewEntry(newDetails)" 
 				class="add-button"
-				id="add-entry-button">
+				test="add-entry-button">
 			Add Note
-		</Button>
+		</button>
 	</div>
 </template>
 

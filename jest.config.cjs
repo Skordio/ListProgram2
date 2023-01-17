@@ -15,7 +15,7 @@ module.exports = {
       '!src/model/*',
       '!*.d.ts',
     ],
-    coverageReporters: ['html', 'text', 'lcov'],
+    coverageReporters: ['text'],
     rootDir: './',
     moduleFileExtensions: ['js', 'json', 'ts', 'vue'],
     transform: {
@@ -23,6 +23,9 @@ module.exports = {
       '^.+\\.vue$': '@vue/vue3-jest',
       '^.+\\.tsx?$': 'ts-jest'
     },
+    testPathIgnorePatterns : [
+      "./src/assets/*" 
+    ],
     moduleNameMapper: {
       '^@/(.*)$': '<rootDir>/src/$1'
     },
