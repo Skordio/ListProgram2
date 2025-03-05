@@ -24,10 +24,10 @@
                 <div class="two-buttons-container">
                     <button class="edit button" @click="editThisEntry()"><p class="edit-text">Edit</p></button>
                     <button class="delete button" @click="$emit('delete')">
-                        <img src="src\assets\trash2.png" alt="Delete" width="20" height="20" class="icon">
+                        <img src="..\assets\trash2.png" alt="Delete" width="20" height="20" class="icon">
                     </button>
                     <button class="done button" @click="$emit('done')">
-                        <img src="src\assets\check2.png" alt="Done" width="20" height="20" class="icon">
+                        <img src="..\assets\check2.png" alt="Done" width="20" height="20" class="icon">
                     </button>
                     <input v-model="estimatedTime" placeholder="est. time (hrs)" class="est-time" @keyup="$emit('timeEdit', estimatedTime)" />
                 </div>
